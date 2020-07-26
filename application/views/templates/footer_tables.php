@@ -2,8 +2,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; BPS UNM 2020</span> <br> <br>
-            <span>Developer by @abdussalam_attaqwa</span>
+            <span>Developer by <i class="fab fa-instagram"></i> @abdussalam_attaqwa</span>
         </div>
     </div>
 </footer>

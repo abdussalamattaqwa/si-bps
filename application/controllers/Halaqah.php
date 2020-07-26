@@ -56,6 +56,7 @@ class Halaqah extends CI_Controller
 
 
         $pilih_angkatan = (date('m') <= 8) ? date('Y') - 1 : date('Y');
+        $data['semester'] = (date('m') <= 8) ? 'Genap' : 'Ganjil';
 
         $this->db->select('`data_halaqah`.*, `daftar_kelas`.`kelas`, `data_tutor`.`nama`');
         $this->db->from('data_halaqah');
@@ -63,6 +64,7 @@ class Halaqah extends CI_Controller
         $this->db->join('data_tutor', 'data_tutor.id = data_halaqah.id_tutor', 'left');
         $this->db->where('daftar_kelas.fakultas', $data['fakultas']);
         $this->db->where('data_halaqah.tahun', $pilih_angkatan);
+        $this->db->where('daftar_kelas.semester', $data['semester']);
 
         // if (isset($_GET['jk'])) {
         if ($data['status'] == 'dosen') {

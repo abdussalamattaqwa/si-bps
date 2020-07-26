@@ -27,8 +27,8 @@
         <div class="col-lg-2">
 
             <select name="" id="" class="form-control select_semester">
-                <option>Ganjil</option>
-                <option>Genap</option>
+                <option <?= ($semester == 'Ganjil') ? 'selected' : ''; ?>>Ganjil</option>
+                <option <?= ($semester == 'Genap') ? 'selected' : ''; ?>>Genap</option>
             </select>
         </div>
 
