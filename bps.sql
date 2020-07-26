@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jul 2020 pada 08.19
+-- Waktu pembuatan: 27 Jul 2020 pada 01.29
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.10
 
@@ -71,33 +71,38 @@ CREATE TABLE `daftar_kelas` (
 --
 
 INSERT INTO `daftar_kelas` (`id`, `tingkat`, `fakultas`, `jurusan`, `prodi`, `kelas`, `semester`) VALUES
-(1, 1, 'TEKNIK', '', '', '', 'Ganjil'),
-(2, 2, 'TEKNIK', 'Pendidikan Teknik Elektro', '', '', 'Ganjil'),
-(3, 2, 'TEKNIK', 'Pendidikan Teknologi Pertanian', '', '', 'Ganjil'),
-(4, 3, 'TEKNIK', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Infomatika dan Komputer (S1)', '', 'Ganjil'),
+(1, 1, 'Teknik', '', '', '', 'Ganjil'),
+(2, 2, 'Teknik', 'Pendidikan Teknik Elektro', '', '', 'Ganjil'),
+(3, 2, 'Teknik', 'Pendidikan Teknologi Pertanian', '', '', 'Ganjil'),
+(4, 3, 'Teknik', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Infomatika dan Komputer (S1)', '', 'Ganjil'),
 (5, 1, 'MIPA', '', '', '', 'Ganjil'),
-(8, 1, 'BAHASA DAN SASTRA', '', '', '', 'Ganjil'),
+(8, 1, 'Bahasa dan Sastra', '', '', '', 'Ganjil'),
 (9, 2, 'MIPA', 'Pendidikan Matematika', '', '', 'Ganjil'),
 (10, 3, 'MIPA', 'Pendidikan Matematika', 'Pendidikan Matematika (S1)', '', ''),
 (11, 4, 'MIPA', 'Pendidikan Matematika', 'Pendidikan Matematika (S1)', 'MTK D', ''),
 (12, 4, 'MIPA', 'Pendidikan Matematika', 'Pendidikan Matematika (S1)', 'MTK B', ''),
-(14, 4, 'TEKNIK', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Infomatika dan Komputer (S1)', 'PTIK A', 'Ganjil'),
-(15, 4, 'TEKNIK', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Infomatika dan Komputer (S1)', 'PTIK B', 'Ganjil'),
-(19, 3, 'TEKNIK', 'Pendidikan Teknologi Pertanian', 'Pendidikan Teknologi Pertanian (S1)', '', 'Genap'),
-(21, 2, 'BAHASA DAN SASTRA', 'Pendidikan Bahasa Inggris', '', '', 'Ganjil'),
-(22, 3, 'BAHASA DAN SASTRA', 'Pendidikan Bahasa Inggris', 'Pendidikan Bahasa Inggris (S1)', '', 'Ganjil'),
-(27, 2, 'TEKNIK', 'Pendidikan Teknik Elektronika', '', '', ''),
-(28, 3, 'TEKNIK', 'Pendidikan Teknik Elektronika', 'Teknik Elektronika (DIII)', '', 'Ganjil'),
-(29, 3, 'TEKNIK', 'Pendidikan Teknik Elektronika', 'Pendidikan Teknik Elektronika (S1)', '', 'Ganjil'),
-(30, 3, 'TEKNIK', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Elektro (S1)', '', 'Ganjil'),
-(31, 3, 'TEKNIK', 'Pendidikan Teknik Elektro', 'Teknik Elektro (DIII)', '', 'Ganjil'),
-(32, 2, 'TEKNIK', 'Pendidikan Otomotif', '', '', ''),
-(33, 3, 'TEKNIK', 'Pendidikan Otomotif', 'Teknik Otomotif (DIII)', '', 'Ganjil'),
-(34, 3, 'TEKNIK', 'Pendidikan Otomotif', 'Pendidikan Teknik Otomotif (S1)', '', 'Ganjil'),
-(35, 2, 'TEKNIK', 'Teknik Komputer', '', '', ''),
-(36, 3, 'TEKNIK', 'Teknik Komputer', 'Teknik Komputer (S1)', '', 'Genap'),
-(39, 1, 'SENI', '', '', '', ''),
-(44, 4, 'TEKNIK', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Infomatika dan Komputer (S1)', 'PTIK C', '');
+(14, 4, 'Teknik', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Infomatika dan Komputer (S1)', 'PTIK A', 'Ganjil'),
+(15, 4, 'Teknik', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Infomatika dan Komputer (S1)', 'PTIK B', 'Ganjil'),
+(19, 3, 'Teknik', 'Pendidikan Teknologi Pertanian', 'Pendidikan Teknologi Pertanian (S1)', '', 'Genap'),
+(21, 2, 'Bahasa dan Sastra', 'Pendidikan Bahasa Inggris', '', '', 'Ganjil'),
+(22, 3, 'Bahasa dan Sastra', 'Pendidikan Bahasa Inggris', 'Pendidikan Bahasa Inggris (S1)', '', 'Ganjil'),
+(27, 2, 'Teknik', 'Pendidikan Teknik Elektronika', '', '', ''),
+(28, 3, 'Teknik', 'Pendidikan Teknik Elektronika', 'Teknik Elektronika (DIII)', '', 'Ganjil'),
+(29, 3, 'Teknik', 'Pendidikan Teknik Elektronika', 'Pendidikan Teknik Elektronika (S1)', '', 'Ganjil'),
+(30, 3, 'Teknik', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Elektro (S1)', '', 'Ganjil'),
+(31, 3, 'Teknik', 'Pendidikan Teknik Elektro', 'Teknik Elektro (DIII)', '', 'Ganjil'),
+(32, 2, 'Teknik', 'Pendidikan Otomotif', '', '', ''),
+(33, 3, 'Teknik', 'Pendidikan Otomotif', 'Teknik Otomotif (DIII)', '', 'Ganjil'),
+(34, 3, 'Teknik', 'Pendidikan Otomotif', 'Pendidikan Teknik Otomotif (S1)', '', 'Ganjil'),
+(35, 2, 'Teknik', 'Teknik Komputer', '', '', ''),
+(36, 3, 'Teknik', 'Teknik Komputer', 'Teknik Komputer (S1)', '', 'Genap'),
+(39, 1, 'Seni & Desain', '', '', '', ''),
+(44, 4, 'Teknik', 'Pendidikan Teknik Elektro', 'Pendidikan Teknik Infomatika dan Komputer (S1)', 'PTIK C', ''),
+(45, 1, 'Ilmu Pendidikan', '', '', '', ''),
+(46, 1, 'Psikologi', '', '', '', ''),
+(47, 1, 'Ilmu Keolahragaan', '', '', '', ''),
+(48, 1, 'Ilmu Sosial', '', '', '', ''),
+(49, 1, 'Ekonomi', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -120,7 +125,9 @@ CREATE TABLE `data_dosen` (
 
 INSERT INTO `data_dosen` (`id`, `id_user`, `nip`, `nama`, `telp`, `alamat`) VALUES
 (4, 48, 123, 'Kordosen', '089965414582', 'Kabupaten Gowa'),
-(12, 56, 111, 'Dosen', '1111', 'gowa');
+(12, 56, 111, 'Dosen', '1111', 'gowa'),
+(13, 57, 22, 'Dosen fulanah', '', ''),
+(14, 59, 0, 'kordosen_fakultas', '', '');
 
 -- --------------------------------------------------------
 
@@ -131,7 +138,7 @@ INSERT INTO `data_dosen` (`id`, `id_user`, `nip`, `nama`, `telp`, `alamat`) VALU
 CREATE TABLE `data_halaqah` (
   `id` int(11) NOT NULL,
   `id_kelas` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `level` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `level` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jk` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_tutor` int(255) NOT NULL,
   `tahun` int(10) NOT NULL
@@ -142,8 +149,8 @@ CREATE TABLE `data_halaqah` (
 --
 
 INSERT INTO `data_halaqah` (`id`, `id_kelas`, `level`, `jk`, `id_tutor`, `tahun`) VALUES
-(1, '14', 'A', 'P', 5, 2020),
-(2, '14', 'B', 'P', 3, 2020),
+(1, '14', 'A', 'P', 3, 2020),
+(2, '14', 'B', 'P', 5, 2020),
 (3, '14', 'A', 'L', 2, 2020),
 (4, '14', 'B', 'L', 4, 2020),
 (5, '12', 'sal', 'L', 0, 2020);
@@ -246,7 +253,8 @@ INSERT INTO `data_tutor` (`id`, `nim`, `nama`, `telp`, `id_prodi`, `alamat`, `id
 (2, 1629041033, 'korbps_ikhwah', '089965414582', 0, 'Kabupaten Gowa', 0, 52),
 (3, 0, 'korbps_akhwat', '', 4, '', 0, 53),
 (4, 0, 'korfak_ikhwah', '', 4, '', 0, 54),
-(5, 123, 'korfak_akhwat', '', 4, '', 0, 55);
+(5, 123, 'korfak_akhwat', '', 4, '', 0, 55),
+(6, 0, 'tutor', '', 0, '', 0, 60);
 
 -- --------------------------------------------------------
 
@@ -270,14 +278,15 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `telp`, `jk`, `angkatan`, `id_kelas`, `id_halaqah`) VALUES
-(1, '1629041033', 'Abdussalam', '0899', 'L', 2020, 14, 3),
+(1, '1629041033', 'Abdussalam Attaqwa', '0899', 'L', 2020, 14, 3),
 (2, '1629042031', 'fulanah', '0899', 'P', 2020, 14, 1),
 (3, '1629041033', 'fulan', '99982', 'L', 2020, 14, 3),
 (4, '1829042031', 'fifi', '1111', 'P', 2020, 14, 2),
 (5, '1233', 'alam', '', 'L', 2020, 14, 3),
 (7, '1', 'abdus salam', '213', 'L', 2020, 14, 4),
 (8, '99', 'kakak', '', 'L', 2020, 14, 4),
-(9, '123', 'Salam', '999', 'L', 2020, 15, 5);
+(9, '123', 'Salam', '999', 'L', 2020, 15, 0),
+(10, '999', 'aku', '999', 'L', 2020, 15, 0);
 
 -- --------------------------------------------------------
 
@@ -336,10 +345,14 @@ INSERT INTO `user` (`id`, `name`, `jk`, `username`, `email`, `image`, `password`
 (1, 'admin', 'L', 'admin', 'salamabdus072@gmail.com', 'WIN_20191210_07_38_56_Pro.jpg', '$2y$10$oaFIxxdl2RHUBiVOSFWwiOOe8Wu8pl8FO457C3eqDMORaWcCXbGPq', 1, 1, 1591800123),
 (48, 'Kordosen', 'L', 'kordosen', 'kordosen@gmail.com', 'default.jpg', '$2y$10$HUI5NnuFWoLe34I.sc/mYOdBmIFOZl1V4PxPJJl02sALN6XgjxOOy', 2, 1, 1592231747),
 (52, 'korbps_ikhwah', 'L', 'korbps_ikhwah', 'korbps_ikhwah@gmail.com', 'default.jpg', '$2y$10$oaZtdJltP7wbwjm6MlMwVuptZXkJYAp195E6pdk45YQL/RU2.InhW', 3, 1, 1592232084),
-(53, 'korbps_akhwat', 'P', 'korbps_akhwat', 'korbps_akhwat@gmail.com', 'defaultp.jpg', '$2y$10$F8DkG48cWy/ybXa/PlIj9eLRl95tjgS7XHBlcPyjwEI9k2MjVXluq', 3, 1, 1592232118),
+(53, 'korbps_akhwat', 'P', 'korbps_akhwat', 'korbps_akhwat@gmail.com', 'Jembatan.JPG', '$2y$10$F8DkG48cWy/ybXa/PlIj9eLRl95tjgS7XHBlcPyjwEI9k2MjVXluq', 3, 1, 1592232118),
 (54, 'korfak_ikhwah', 'L', 'korfak_ikhwah', 'korfak_ikhwah@gmail.com', 'default.jpg', '$2y$10$ukyIBzuqxwml7B/0jyuZvOqom9Z2qgLIjTcsnpuibjwjabk13vkOO', 7, 1, 1592232252),
 (55, 'korfak_akhwat', 'P', 'korfak_akhwat', 'korfak_akhwat@gmail.com', 'defaultp.jpg', '$2y$10$zUPzkExlNSIeOQqUYiZrvumlB9PcO2lELo8ji0D6MfxCbchzGh8.i', 7, 1, 1592232288),
-(56, 'Dosen', 'L', 'dosen', 'dosen@gmail.com', 'default.jpg', '$2y$10$s3jgCEhfDCcZ2AmyT1qWB.HCLKL3cVjWZ8Fpycc/kcCr1JFub5hLG', 6, 1, 1592232781);
+(56, 'Dosen', 'L', 'dosen', 'dosen@gmail.com', 'default.jpg', '$2y$10$s3jgCEhfDCcZ2AmyT1qWB.HCLKL3cVjWZ8Fpycc/kcCr1JFub5hLG', 6, 1, 1592232781),
+(57, 'Dosen fulanah', 'P', 'dosen_fulanah', 'dosen_fulanah@gmail.com', 'defaultp.jpg', '$2y$10$C69l/XamHRMhXz5yf9SvteuJ/BE7lDtTjIB118PX6au6DbMY.YdWe', 6, 1, 1593785549),
+(58, 'administrator', 'L', 'administrator', 'administrator@gmail.com', 'default.jpg', '$2y$10$R.ZYMcM7QZGvzSBOU.Df2eON/GW2lGeoP7GR6qo5wGRWMaIcO8UT2', 1, 1, 1593837927),
+(59, 'kordosen_fakultas', 'L', 'kordsen_fakultas', 'kordosen_fakultas@gmail.com', 'default.jpg', '$2y$10$yEnmrafP3mdtYa55Hq7CuOIJP7eiB.8GzlcrdVlkEIx7apqRkdeQq', 4, 1, 1593870193),
+(60, 'tutor', 'L', 'tutor', 'tutor@gmail.com', 'default.jpg', '$2y$10$KiGkUm8PXX6VJanzU4Kyt.Twt1xJFtqA81G9a7fF8pWBeButHq2hW', 8, 1, 1595484098);
 
 -- --------------------------------------------------------
 
@@ -359,9 +372,7 @@ CREATE TABLE `user_access_menu` (
 
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
-(7, 8, 2),
 (8, 8, 4),
-(24, 1, 2),
 (26, 7, 6),
 (30, 2, 9),
 (31, 2, 7),
@@ -390,7 +401,11 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (58, 1, 8),
 (59, 1, 9),
 (60, 7, 7),
-(61, 6, 7);
+(61, 6, 7),
+(62, 1, 2),
+(63, 8, 8),
+(64, 8, 6),
+(65, 8, 3);
 
 -- --------------------------------------------------------
 
@@ -475,7 +490,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (16, 7, 'Daftar Halaqah', 'halaqah', 'fas fa-fw fa-chalkboard', 1),
 (17, 6, 'Ujian SAINS', 'ujian', 'fas fa-fw fa-book-open', 1),
 (18, 8, 'Halaqah Binaan', 'Binaan', 'fas fa-fw fa-book-reader', 1),
-(19, 9, 'Data Nilai', 'nilai', 'fas fa-fw fa-clipboard', 1),
+(19, 9, 'Daftar Nilai', 'nilai', 'fas fa-fw fa-clipboard', 1),
 (20, 10, 'Baca Qur\'an', 'quran', 'fas fa-fw fa-book-open', 1);
 
 -- --------------------------------------------------------
@@ -490,16 +505,6 @@ CREATE TABLE `user_token` (
   `token` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_created` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `user_token`
---
-
-INSERT INTO `user_token` (`id`, `email`, `token`, `date_created`) VALUES
-(1, 'salamabdus072@gmail.com', 'ZdNjWjZT1ajSknT49KInzuA3hspo27Cn2u4Kajj386M=', 1592816897),
-(2, 'salamabdus072@gmail.com', 'NbKEtimImkJKPF6amiH/0NI/gy/VS8wMOm89hHevlb4=', 1592816914),
-(3, 'salamabdus072@gmail.com', 'A3oXKLM1U53fGWgjk6EbEYWll+uIMf3khxROHF7nslQ=', 1592817267),
-(4, 'salamabdus072@gmail.com', 'k2cX0/cn6xMJZGLeMHgw1aXCQL4Pls3yesqtYeei1D4=', 1593754392);
 
 --
 -- Indexes for dumped tables
@@ -603,13 +608,13 @@ ALTER TABLE `bc_quran`
 -- AUTO_INCREMENT untuk tabel `daftar_kelas`
 --
 ALTER TABLE `daftar_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_dosen`
 --
 ALTER TABLE `data_dosen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_halaqah`
@@ -627,13 +632,13 @@ ALTER TABLE `data_quran`
 -- AUTO_INCREMENT untuk tabel `data_tutor`
 --
 ALTER TABLE `data_tutor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `nilai_sains`
@@ -645,13 +650,13 @@ ALTER TABLE `nilai_sains`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_menu`
@@ -675,7 +680,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `user_token`
 --
 ALTER TABLE `user_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
