@@ -101,6 +101,10 @@
                     <td>: <?= $kelas['semester'] . '/' . $tahun; ?></td>
                 </tr>
                 <tr>
+                    <td>Fakultas</td>
+                    <td>: <?= $kelas['fakultas'] . '/' . $tahun; ?></td>
+                </tr>
+                <tr>
                     <td>Jurusan</td>
                     <td>: <?= $kelas['jurusan']; ?></td>
                 </tr>
@@ -162,13 +166,14 @@
                 </table>
                 <br>
             <?php endforeach; ?>
-
+            <b> Catatan </b>
+            <ul>
+                <li> Harap perwakilan halaqah menelpon tutor masing-masing untuk menentukan jadwal pekanannya</li>
+                <li> Pertemuan pekanan antara senin sampai jum'at</li>
+            </ul>
         </div>
     </div>
 
-    <script>
-        window.print();
-    </script>
 </body>
 
 </html>

@@ -114,7 +114,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Prodi</label>
                     <div class="col-sm-10">
-                        <select name="prodi" id="role_id" class="form-control">
+                        <select name="prodi" class="form-control">
                             <?php foreach ($prodi as $dp) : ?>
                                 <option value="<?= $dp['id']; ?>" <?= ($dp['id'] == $user_edit['id_prodi']) ? 'selected' : ''; ?>><?= $dp['prodi']; ?></option>
                             <?php endforeach; ?>

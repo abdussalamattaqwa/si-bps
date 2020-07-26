@@ -29,6 +29,8 @@ class Tutor extends CI_Controller
         $this->db->where_in('role_id', [3, 5, 7, 8]);
 
         $data['jk'] = $data['user']['jk'];
+
+
         if (isset($_GET['jk'])) {
             if ($data['status'] == 'dosen') {
                 $data['jk'] = $_GET['jk'];
@@ -118,10 +120,23 @@ class Tutor extends CI_Controller
             $this->load->view('administrasi/registrasi', $data);
             $this->load->view('templates/footer');
         } else {
+
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+            $roleinput = htmlspecialchars($this->input->post('role_id', true));
+            if ($data['user']['role_id'] > $roleinput) {
+
+                $this->load->view('auth/blocked');
+                return;
+            }
+
+            die;
             $email = $this->input->post('email', true);
             $active = $this->input->post('is_active');
+
             if ($active == null) $active = 0;
             $gambar = 'default.jpg';
+
             if ($this->input->post('jk') == 'P') $gambar = 'defaultp.jpg';
 
             $data = [

@@ -6,9 +6,12 @@
     <?= $this->session->flashdata('message'); ?>
 
     <div class="row text-gray-900">
-        <div class="col-lg-2">
-            <a href="<?= base_url('Tutor/tambah_tutor'); ?>" class="btn btn-primary mb-3">Tambah Tutor</a>
-        </div>
+
+        <?php if ($status != 'dosen') : ?>
+            <div class="col-lg-2">
+                <a href="<?= base_url('Tutor/tambah_tutor'); ?>" class="btn btn-primary mb-3">Tambah Tutor</a>
+            </div>
+        <?php endif; ?>
 
         <?php if ($status == 'dosen') : ?>
             <label class="col-lg-2 col-form-label ">Jenis Kelamin</label>
@@ -48,11 +51,14 @@
                                 <td data-id="<?= $dtTutor['id']; ?>" data-idUser="<?= $dtTutor['id_user']; ?>">
                                     <!-- Tombol Edit -->
                                     <a href="" class="badge badge-primary detail-tutor" data-toggle="modal" data-target="#ModalDetail">Detail</a>
-                                    <a href="<?= base_url('Tutor/edit_tutor/' . $dtTutor['iduser']); ?>" class="badge badge-success">Edit</a>
 
-                                    <?php if ($dtTutor['iduser'] != $user['id']) : ?>
-                                        <a href="" class=" badge badge-danger delete-tutor" data-toggle="modal" data-target="#hapusModal">Delete
-                                        </a>
+                                    <?php if ($status != 'dosen') : ?>
+                                        <a href="<?= base_url('Tutor/edit_tutor/' . $dtTutor['iduser']); ?>" class="badge badge-success">Edit</a>
+
+                                        <?php if ($dtTutor['iduser'] != $user['id']) : ?>
+                                            <a href="" class=" badge badge-danger delete-tutor" data-toggle="modal" data-target="#hapusModal">Delete
+                                            </a>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -144,10 +150,16 @@
         });
     });
 
-    const select_jk = document.querySelector('.select_jk');
-    select_jk.addEventListener('change', function() {
-        let jk = select_jk.selectedOptions[0].value;
-        window.open(`?jk=${jk}`, '_self');
-    })
+    try {
+        const select_jk = document.querySelector('.select_jk');
+
+        select_jk.addEventListener('change', function() {
+            let jk = select_jk.selectedOptions[0].value;
+            window.open(`?jk=${jk}`, '_self');
+        })
+    } catch (error) {
+
+    }
+
     // console.log(select_jk);
 </script>

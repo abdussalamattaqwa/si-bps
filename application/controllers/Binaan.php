@@ -21,8 +21,6 @@ class Binaan extends CI_Controller
 
         $dataTutor = $this->db->get_where('data_tutor', ['id_user' => $data['user']['id']])->row_array();
 
-        // var_dump($dataTutor);
-        // var_dump($dataTutor['id']);
 
         if ($dataTutor == null) {
             $dataTutor['id'] = null;
@@ -35,18 +33,37 @@ class Binaan extends CI_Controller
         $this->db->where('data_halaqah.tahun', date('Y'));
         $data['halaqah'] = $this->db->get()->result_array();
 
-
+        $pilih_angkatan = (date('m') <= 8) ? date('Y') - 1 : date('Y');
 
         $this->db->select('tahun');
         $this->db->from('data_halaqah');
         $this->db->group_by('tahun');
-        $this->db->order_by('tahun', 'DESC');
+        $this->db->order_by('tahun', 'asc');
         $data['tahun'] = $this->db->get()->result_array();
+
+        $now = false;
+        $lastyear = false;
+        foreach ($data['tahun'] as $thn) {
+            if ($thn['tahun'] == date('Y')) {
+                $now = true;
+            }
+            if ($thn['tahun'] == (date('Y') - 1)) {
+                $lastyear = true;
+            }
+        }
+
+        if (!$lastyear) {
+            $data['tahun'][]['tahun'] = date('Y') - 1;
+        }
+        if (!$now) {
+            $data['tahun'][]['tahun'] = (date('Y'));
+        }
+        rsort($data['tahun']);
 
         $i = 0;
         foreach ($data['tahun'] as $t) {
 
-            if ($t['tahun'] == 2020) {
+            if ($t['tahun'] == $pilih_angkatan) {
                 $data['tahun'][$i]['selected'] = 'selected';
             } else {
                 $data['tahun'][$i]['selected'] = '';
@@ -84,7 +101,7 @@ class Binaan extends CI_Controller
         $data['halaqah'] = $this->db->get()->result_array();
 
         if (count($data['halaqah']) < 1) {
-            echo '<div class="alert alert-danger" role="alert">Halaqah tidak ditemukan, silahkan hubungi kordinator fakultas BPS UNM</div>';
+            echo '<div class="alert alert-danger" role="alert">Halaqah tidak ditemukan, silahkan hubungi kordinator fakultas atau kordinator BPS UNM</div>';
         } else {
             $this->load->view('binaan/ajax_data_binaan', $data);
         };

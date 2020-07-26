@@ -54,12 +54,15 @@ class Halaqah extends CI_Controller
 
         $data['status'] = search_user_role($data['user']['role_id']);
 
+
+        $pilih_angkatan = (date('m') <= 8) ? date('Y') - 1 : date('Y');
+
         $this->db->select('`data_halaqah`.*, `daftar_kelas`.`kelas`, `data_tutor`.`nama`');
         $this->db->from('data_halaqah');
         $this->db->join('daftar_kelas', 'daftar_kelas.id = data_halaqah.id_kelas');
         $this->db->join('data_tutor', 'data_tutor.id = data_halaqah.id_tutor', 'left');
         $this->db->where('daftar_kelas.fakultas', $data['fakultas']);
-        $this->db->where('data_halaqah.tahun', date('Y'));
+        $this->db->where('data_halaqah.tahun', $pilih_angkatan);
 
         // if (isset($_GET['jk'])) {
         if ($data['status'] == 'dosen') {
@@ -67,9 +70,11 @@ class Halaqah extends CI_Controller
         } else
             $this->db->where('data_halaqah.jk', $data['user']['jk']);
 
+
         $this->db->where('daftar_kelas.semester', 'Ganjil');
         $this->db->order_by('kelas', 'asc');
         $data['halaqah'] = $this->db->get()->result_array();
+
         $i = 0;
         foreach ($data['halaqah'] as $h) :
             $idhalaqah = $h['id'];
@@ -81,20 +86,35 @@ class Halaqah extends CI_Controller
         $this->db->select('tahun');
         $this->db->from('data_halaqah');
         $this->db->group_by('tahun');
-        $this->db->order_by('tahun', 'DESC');
+        $this->db->order_by('tahun', 'asc');
         $data['tahun'] = $this->db->get()->result_array();
 
 
-        $mhs = $this->db->get_where('data_halaqah', ['tahun' => date('Y')])->num_rows();
-        if ($mhs == 0) {
-            $data['tahun'][]['tahun'] = date('Y');
-            rsort($data['tahun'][]);
+        $now = false;
+        $lastyear = false;
+        foreach ($data['tahun'] as $thn) {
+            if ($thn['tahun'] == date('Y')) {
+                $now = true;
+            }
+            if ($thn['tahun'] == (date('Y') - 1)) {
+                $lastyear = true;
+            }
         }
+
+        if (!$lastyear) {
+            $data['tahun'][]['tahun'] = date('Y') - 1;
+        }
+        if (!$now) {
+            $data['tahun'][]['tahun'] = (date('Y'));
+        }
+        rsort($data['tahun']);
+
+
 
         $i = 0;
         foreach ($data['tahun'] as $t) {
 
-            if ($t['tahun'] == date('Y')) {
+            if ($t['tahun'] == $pilih_angkatan) {
                 $data['tahun'][$i]['selected'] = 'selected';
             } else {
                 $data['tahun'][$i]['selected'] = '';
@@ -167,11 +187,15 @@ class Halaqah extends CI_Controller
         $data['fakultas'] = urldecode($f);
 
         $this->db->select('id, tingkat, fakultas, jurusan, prodi, semester');
-        $this->db->where('fakultas', $f);
-        $this->db->where('tingkat', 2);
-        $this->db->or_where('fakultas', $f);
-        $this->db->where('tingkat', 3);
-        $this->db->order_by('prodi');
+        $this->db->where([
+            'tingkat' => 2,
+            'fakultas' => $data['fakultas']
+        ]);
+        $this->db->or_where([
+            'tingkat' => 3,
+            'fakultas' => $data['fakultas']
+        ]);
+        $this->db->order_by('jurusan');
         $data['jurusan'] = $this->db->get('daftar_kelas')->result_array();
 
 
@@ -199,16 +223,43 @@ class Halaqah extends CI_Controller
 
         $data['daftar_kelas'] = $this->db->get()->result_array();
 
+
         $this->db->select('angkatan');
         $this->db->from('mahasiswa');
         $this->db->group_by('angkatan');
         $this->db->order_by('angkatan', 'DESC');
         $data['tahun'] = $this->db->get()->result_array();
 
-        $mhs = $this->db->get_where('mahasiswa', ['angkatan' => date('Y')])->num_rows();
-        if ($mhs == 0) {
-            $data['tahun'][]['angkatan'] = date('Y');
-            rsort($data['tahun']);
+        $pilih_angkatan = (date('m') <= 8) ? date('Y') - 1 : date('Y');
+
+
+        $now = false;
+        $lastyear = false;
+        foreach ($data['tahun'] as $thn) {
+            if ($thn['angkatan'] == date('Y')) {
+                $now = true;
+            }
+            if ($thn['angkatan'] == (date('Y') - 1)) {
+                $lastyear = true;
+            }
+        }
+
+        if (!$lastyear) {
+            $data['tahun'][]['angkatan'] = date('Y') - 1;
+        }
+        if (!$now) {
+            $data['tahun'][]['angkatan'] = (date('Y'));
+        }
+        rsort($data['tahun']);
+
+        $i = 0;
+        foreach ($data['tahun'] as $t) {
+            if ($t['angkatan'] == $pilih_angkatan) {
+                $data['tahun'][$i]['selected'] = 'selected';
+            } else {
+                $data['tahun'][$i]['selected'] = '';
+            }
+            $i++;
         }
 
         $i = 0;
@@ -217,7 +268,7 @@ class Halaqah extends CI_Controller
             $idKelas = $kelas['id'];
             $jumlah_mahasiswa = $this->db->get_where('mahasiswa', [
                 'id_kelas' => $idKelas,
-                'angkatan' => 2020
+                'angkatan' => $pilih_angkatan
             ])->num_rows();
 
             $data['daftar_kelas'][$i]['anggota'] = $jumlah_mahasiswa;

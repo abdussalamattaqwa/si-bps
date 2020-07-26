@@ -35,6 +35,10 @@ class Dosen extends CI_Controller
 
     public function tambah_dosen()
     {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        if ($data['user']['role_id'] > 4) {
+            redirect('dosen');
+        }
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'this email has already registered!'
@@ -50,11 +54,11 @@ class Dosen extends CI_Controller
                 'is_unique' => 'NIP telah terdaftar'
             ]);
         }
+
+
+
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Daftar Dosen';
-
-            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
             $data['status'] = 'dosen';
 
             // $data['role'] = $this->db->get('user_role')->result_array();
@@ -68,6 +72,8 @@ class Dosen extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             // echo "data berhasil ditambahkan!";
+
+
             $email = $this->input->post('email', true);
             $active = $this->input->post('is_active');
             if ($active == null) $active = 0;
@@ -107,6 +113,7 @@ class Dosen extends CI_Controller
 
     public function update_dosen()
     {
+
         $idUser = $this->input->post('idUser');
         $idDosen = $this->input->post('idDosen');
 
@@ -182,11 +189,13 @@ class Dosen extends CI_Controller
         redirect('Dosen');
     }
 
-    public function edit_dosen($idUser, $idDosen)
+    public function edit_dosen($idUser)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-
+        if ($data['user']['role_id'] > 4) {
+            redirect('dosen');
+        }
         $data['title'] = 'Daftar Dosen';
 
         $data['status'] = 'dosen';

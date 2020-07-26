@@ -20,14 +20,9 @@
         <label for="angkatan" class="col-sm-2 col-form-label">Angkatan</label>
         <div class="col-sm-6">
             <select name="" id="" class="form-control select_angkatan">
-                <?php foreach ($tahun as $t) :
-                    if ($t['selected'] == '') { ?>
-                        <a href="">
-                            <option><?= $t['angkatan']; ?></option>
-                        </a>
-                    <?php } else { ?>
-                        <option <?= $t['selected']; ?>><?= $t['angkatan']; ?></option>
-                <?php }
+                <?php foreach ($tahun as $t) : ?>
+                    <option <?= $t['selected']; ?>><?= $t['angkatan']; ?></option>
+                <?php
                 endforeach; ?>
             </select>
         </div>

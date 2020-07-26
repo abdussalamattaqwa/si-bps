@@ -30,7 +30,9 @@ class Admin_model extends CI_Model
             $this->db->or_where('role_id', 8);
             return $this->db->get()->num_rows();
         } else {
-            return $this->db->get('user')->num_rows();
+            $this->db->from('user');
+            $this->db->where('role_id', 1);
+            return $this->db->get()->num_rows();
         }
     }
 
@@ -73,7 +75,7 @@ class Admin_model extends CI_Model
         $this->db->select('user.*, user_role.*, user.id as iduser');
         $this->db->from('user');
         $this->db->join('user_role', 'user_role.id = user.role_id');
-        $this->db->where('user.id !=', 1);
+        // $this->db->where('user.id !=', 1);
         $this->db->order_by('role_id');
         return $this->db->get()->result_array();
     }

@@ -27,7 +27,6 @@ class Nilai extends CI_Controller
             if ($mhs['fakultas'] != null)
                 redirect(base_url('nilai/fakultas/' . $mhs['fakultas']));
         };
-        // $data['daftar_kelas'] = $this->db->get('daftar_kelas')->result_array();
 
         $this->db->from('daftar_kelas');
         $this->db->where('tingkat', 1);
@@ -89,18 +88,33 @@ class Nilai extends CI_Controller
         $this->db->select('angkatan');
         $this->db->from('mahasiswa');
         $this->db->group_by('angkatan');
-        $this->db->order_by('angkatan', 'desc');
+        $this->db->order_by('angkatan', 'asc');
         $data['tahun'] = $this->db->get()->result_array();
 
-        $mhs = $this->db->get_where('mahasiswa', ['angkatan' => date('Y')])->num_rows();
-        if ($mhs == 0) {
-            $data['tahun'][count($data['tahun'])]['angkatan'] = date('Y');
-            rsort($data['tahun']);
+        $pilih_angkatan = (date('m') <= 8) ? date('Y') - 1 : date('Y');
+
+        $now = false;
+        $lastyear = false;
+        foreach ($data['tahun'] as $thn) {
+            if ($thn['angkatan'] == date('Y')) {
+                $now = true;
+            }
+            if ($thn['angkatan'] == (date('Y') - 1)) {
+                $lastyear = true;
+            }
         }
+
+        if (!$lastyear) {
+            $data['tahun'][]['angkatan'] = date('Y') - 1;
+        }
+        if (!$now) {
+            $data['tahun'][]['angkatan'] = (date('Y'));
+        }
+        rsort($data['tahun']);
 
         $i = 0;
         foreach ($data['tahun'] as $t) {
-            if ($t['angkatan'] == 2020) {
+            if ($t['angkatan'] == $pilih_angkatan) {
                 $data['tahun'][$i]['selected'] = 'selected';
             } else {
                 $data['tahun'][$i]['selected'] = '';
@@ -115,14 +129,14 @@ class Nilai extends CI_Controller
             $idKelas = $kelas['id'];
             $jumlah_mahasiswa = $this->db->get_where('mahasiswa', [
                 'id_kelas' => $idKelas,
-                'angkatan' => 2020
+                'angkatan' => $pilih_angkatan
             ])->num_rows();
 
             $data['daftar_kelas'][$i]['anggota'] = $jumlah_mahasiswa;
             $i++;
         endforeach;
 
-        $data['angkatan'] = date('Y');
+        $data['angkatan'] = $pilih_angkatan;
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

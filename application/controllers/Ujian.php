@@ -26,7 +26,7 @@ class Ujian extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('Ujian/index', $data);
+        $this->load->view('ujian/index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -55,7 +55,7 @@ class Ujian extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('Ujian/fakultas', $data);
+        $this->load->view('ujian/fakultas', $data);
         $this->load->view('templates/footer');
     }
 
@@ -77,9 +77,11 @@ class Ujian extends CI_Controller
         $data['kelas'] = $this->db->get()->result_array();
 
 
-
-
-        $pilih_angkatan = (isset($_GET['tahun'])) ? $_GET['tahun'] : date('Y');
+        if (isset($_GET['tahun'])) {
+            $pilih_angkatan = $_GET['tahun'];
+        } else {
+            $pilih_angkatan = (date('m') <= 8) ? date('Y') - 1 : date('Y');
+        }
 
 
         $this->db->select('angkatan');
@@ -88,11 +90,24 @@ class Ujian extends CI_Controller
         $this->db->order_by('angkatan', 'desc');
         $data['tahun'] = $this->db->get()->result_array();
 
-        $mhs = $this->db->get_where('mahasiswa', ['angkatan' => date('Y')])->num_rows();
-        if ($mhs == 0) {
-            $data['tahun'][]['angkatan'] = date('Y');
-            rsort($data['tahun']);
+        $now = false;
+        $lastyear = false;
+        foreach ($data['tahun'] as $thn) {
+            if ($thn['angkatan'] == date('Y')) {
+                $now = true;
+            }
+            if ($thn['angkatan'] == (date('Y') - 1)) {
+                $lastyear = true;
+            }
         }
+
+        if (!$lastyear) {
+            $data['tahun'][]['angkatan'] = date('Y') - 1;
+        }
+        if (!$now) {
+            $data['tahun'][]['angkatan'] = (date('Y'));
+        }
+        rsort($data['tahun']);
 
         $i = 0;
         foreach ($data['tahun'] as $t) {
@@ -120,7 +135,7 @@ class Ujian extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('Ujian/kelas', $data);
+        $this->load->view('ujian/kelas', $data);
         $this->load->view('templates/footer');
     }
 
@@ -138,7 +153,6 @@ class Ujian extends CI_Controller
         ]);
         $this->db->order_by('kelas', 'ASC');
         $data['kelas'] = $this->db->get()->result_array();
-
 
         $i = 0;
         foreach ($data['kelas'] as $kelas) :
@@ -180,7 +194,7 @@ class Ujian extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('Ujian/daftar_mahasiswa', $data);
+        $this->load->view('ujian/daftar_mahasiswa', $data);
         $this->load->view('templates/footer_tables');
     }
 
@@ -216,7 +230,7 @@ class Ujian extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('Ujian/test', $data);
+        $this->load->view('ujian/test', $data);
         $this->load->view('templates/footer');
     }
 

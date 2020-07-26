@@ -23,19 +23,29 @@ class Auth extends CI_Controller
         }
 
         if ($user) {
+
             if ($user['is_active'] == 1) {
+
                 if (password_verify($password, $user['password'])) {
+
                     $data = [
                         'email' => $user['email'],
                         'role_id' => $user['role_id']
                     ];
+
                     $this->session->set_userdata($data);
+                    $remember = $this->input->post('remember');
+                    if (isset($remember)) {
+                        setcookie('id', $user['id'], time() + (60 * 60 * 24 * 365), '/');
+                        setcookie('key', hash('sha256', $user['email']), time() + (60 * 60 * 24 * 365), '/');
+                    }
+
                     if ($user['role_id'] == 1) {
                         redirect('admin');
                     } else {
                         redirect('user');
                     }
-                    redirect('user');
+                    // redirect('user');
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password anda salah</div>');
                     redirect('auth');
@@ -53,6 +63,30 @@ class Auth extends CI_Controller
 
     public function index()
     {
+
+        if (isset($_COOKIE['key']) && isset($_COOKIE['id'])) {
+
+            $user = $this->db->get_where('user', ['id' => $_COOKIE['id']])->row_array();
+            $key = $_COOKIE['key'];
+
+
+            if ($key === hash('shar256', $user['email'])); {
+
+                $data = [
+                    'email' => $user['email'],
+                    'role_id' => $user['role_id']
+                ];
+
+
+                $this->session->set_userdata($data);
+                if ($user['role_id'] == 1) {
+                    redirect('admin');
+                } else {
+                    redirect('user');
+                }
+            }
+        }
+
         if ($this->session->userdata('email')) {
             redirect('user');
         }
@@ -60,7 +94,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Login";
+            $data['title'] = "Sistem Informasi Badan Pelaksana SAISN Universitas Negeri Makassar";
             $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/login');
             $this->load->view('templates/auth_footer');
@@ -92,36 +126,34 @@ class Auth extends CI_Controller
             $this->load->view('auth/registration');
             $this->load->view('templates/auth_footer');
         } else {
-            // echo "data berhasil ditambahkan!";
-            $email = $this->input->post('email', true);
-            // var_dump($this->input->post('username'));
-            // die;
-            $data = [
-                'name' => htmlspecialchars($this->input->post('name', true)),
-                'username' => htmlspecialchars($this->input->post('username')),
-                'email' => htmlspecialchars($email),
-                'image' => 'default.jpg',
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role_id' => 2,
-                'is_active' => 0,
-                'date_created' => time()
-            ];
+            echo 'menu ini tidak aktif';
+            //     $email = $this->input->post('email', true);
+            //     $data = [
+            //         'name' => htmlspecialchars($this->input->post('name', true)),
+            //         'username' => htmlspecialchars($this->input->post('username')),
+            //         'email' => htmlspecialchars($email),
+            //         'image' => 'default.jpg',
+            //         'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            //         'role_id' => 8,
+            //         'is_active' => 0,
+            //         'date_created' => time()
+            //     ];
 
-            // siapkan token
-            $token = base64_encode(random_bytes(32));
-            $user_token = [
-                'email' => $email,
-                'token' => $token,
-                'date_created' => time()
-            ];
+            //     // siapkan token
+            //     $token = base64_encode(random_bytes(32));
+            //     $user_token = [
+            //         'email' => $email,
+            //         'token' => $token,
+            //         'date_created' => time()
+            //     ];
 
-            $this->db->insert('user', $data);
-            $this->db->insert('user_token', $user_token);
+            //     $this->db->insert('user', $data);
+            //     $this->db->insert('user_token', $user_token);
 
-            $this->_sendEmail($token, 'verify');
+            //     $this->_sendEmail($token, 'verify');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congrotulation your acount has been created. Please Activated your account</div>');
-            redirect('auth');
+            //     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congrotulation your acount has been created. Please Activated your account</div>');
+            //     redirect('auth');
         }
     }
 
@@ -130,8 +162,8 @@ class Auth extends CI_Controller
         $config = [
             'protocol'  => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'salamcoba1@gmail.com',
-            'smtp_pass' => 'rumahku24',
+            'smtp_user' => 'abdussalamdeveloper@gmail.com',
+            'smtp_pass' => 'alhamdulillah',
             'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
@@ -196,10 +228,12 @@ class Auth extends CI_Controller
 
     public function logout()
     {
+        setcookie("id", "", time() - 3600, '/');
+        setcookie("key", "", time() - 3600, '/');
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('role_id');
-
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logout</div>');
+
         redirect('auth');
     }
 
@@ -234,7 +268,7 @@ class Auth extends CI_Controller
 
                 $this->_sendEmail($token, 'forgot');
 
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Please check your email to reset your password</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Silahkan cek email anda untuk mereset password, Apabila tidak ditemukan periksalah di menu <b>promotions</b></div>');
                 redirect('auth/forgotpassword');
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registered or activated</div>');

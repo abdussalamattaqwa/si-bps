@@ -54,7 +54,7 @@ class Administrasi extends CI_Controller
             'tingkat' => 2,
             'fakultas' => $fakultas
         ]);
-        $this->db->order_by('jurusan', 'desc');
+        $this->db->order_by('jurusan');
         $data['jurusan'] = $this->db->get()->result_array();
 
 

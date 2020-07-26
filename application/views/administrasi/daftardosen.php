@@ -6,7 +6,9 @@
 
     <?= $this->session->flashdata('message'); ?>
 
-    <a href="<?= base_url('Dosen/tambah_dosen'); ?>" class="btn btn-primary mb-3" id="btnTambahDosen">Tambah Dosen</a>
+    <?php if ($user['role_id'] <= 4) : ?>
+        <a href="<?= base_url('Dosen/tambah_dosen'); ?>" class="btn btn-primary mb-3" id="btnTambahDosen">Tambah Dosen</a>
+    <?php endif; ?>
 
     <div class="card shadow mb-4">
         <!-- <div class="card-header py-3">
@@ -36,7 +38,7 @@
                                     <!-- Tombol Edit -->
                                     <a href="" class="badge badge-primary detail-dosen" data-toggle="modal" data-target="#ModalDetail">Detail</a>
 
-                                    <?php if ($user['id'] != $dtDosen['id_user']) : ?>
+                                    <?php if ($user['role_id'] <= 4 && $user['id'] != $dtDosen['id_user']) : ?>
                                         <a href="<?= base_url('Dosen/edit_dosen/' . $dtDosen['id_user'] . '/' . $dtDosen['id']); ?>" class="badge badge-success editDosen">Edit</a>
 
                                         <a href="" class=" badge badge-danger deleteDosen" data-toggle="modal" data-target="#hapusModal">Delete

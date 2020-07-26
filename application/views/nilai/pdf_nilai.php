@@ -103,6 +103,10 @@
                     <td>: <?= $kelas['semester'] . '/' . $tahun; ?></td>
                 </tr>
                 <tr>
+                    <td>Fakultas</td>
+                    <td>: <?= $kelas['fakultas']; ?></td>
+                </tr>
+                <tr>
                     <td>Jurusan</td>
                     <td>: <?= $kelas['jurusan']; ?></td>
                 </tr>

@@ -49,11 +49,12 @@
                                     ?></td>
                                 <td>
                                     <!-- Tombol Edit -->
-                                    <a href="" class="badge badge-success editUser" data-toggle="modal" data-target="#editModal" data-nama="<?= $u["name"]; ?>" data-email="<?= $u["email"]; ?>" data-role="<?= $u["role_id"]; ?>" data-iduser="<?= $u["iduser"]; ?>" data-username="<?= $u['username']; ?>" data-jk="<?= $u["jk"]; ?>">Edit</a>
+                                    <?php if ($u['iduser'] != 1) : ?>
+                                        <a href="" class="badge badge-success editUser" data-toggle="modal" data-target="#editModal" data-nama="<?= $u["name"]; ?>" data-email="<?= $u["email"]; ?>" data-role="<?= $u["role_id"]; ?>" data-iduser="<?= $u["iduser"]; ?>" data-username="<?= $u['username']; ?>" data-jk="<?= $u["jk"]; ?>">Edit</a>
 
-                                    <a href="" class="badge badge-danger deleteUser" data-toggle="modal" data-target="#deleteModal" data-iduser="<?= $u["iduser"]; ?>" data-nama="<?= $u["name"]; ?>" data-image="<?= $u['image']; ?>" data-roleid="<?= $u['role_id']; ?>">Delete</a>
+                                        <a href="" class="badge badge-danger deleteUser" data-toggle="modal" data-target="#deleteModal" data-iduser="<?= $u["iduser"]; ?>" data-nama="<?= $u["name"]; ?>" data-image="<?= $u['image']; ?>" data-roleid="<?= $u['role_id']; ?>">Delete</a>
 
-
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php $i++; ?>
