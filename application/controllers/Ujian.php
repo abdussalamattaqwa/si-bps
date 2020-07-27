@@ -213,7 +213,7 @@ class Ujian extends CI_Controller
         $this->db->insert('mahasiswa', $data);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa berhasil ditambahkan</div>');
-        redirect('ujian/mahasiswa/' . $idKelas);
+        redirect('ujian/mahasiswa/' . $idKelas . '?tahun=' . $this->input->post('angkatan'));
     }
 
     public function test($test, $proses, $idkelas, $id_mahasiswa)

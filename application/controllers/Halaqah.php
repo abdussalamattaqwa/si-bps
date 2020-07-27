@@ -124,6 +124,7 @@ class Halaqah extends CI_Controller
             $i++;
         }
 
+        $data['pilihan_angkatan'] = $pilih_angkatan;
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -137,8 +138,6 @@ class Halaqah extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['jk'] = $data['user']['jk'];
-
-
 
         $data['fakultas'] = $fakultas;
         $data['tahun'] = $_GET['tahun'];
@@ -277,7 +276,7 @@ class Halaqah extends CI_Controller
             $i++;
         endforeach;
 
-
+        $data['pilihan_angkatan'] = $pilih_angkatan;
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -335,11 +334,14 @@ class Halaqah extends CI_Controller
             }
         }
 
+
+
         $query = "SELECT `mahasiswa`.*, `daftar_kelas`.`kelas`, `nilai_sains`.`pre_test`, `nilai_sains`.`final_test` FROM mahasiswa 
         JOIN `daftar_kelas` ON `mahasiswa`.`id_kelas` = `daftar_kelas`.`id` 
         LEFT JOIN `nilai_sains` ON `mahasiswa`.`id` = `nilai_sains`.`id_mahasiswa`  WHERE `mahasiswa`.`id_kelas` = $idkelas AND `mahasiswa`.`angkatan` = $tahun AND `mahasiswa`.`jk` = '$jk' ORDER BY `mahasiswa`.`id`";
 
         $data['mahasiswa'] = $this->db->query($query)->result_array();
+
 
         $data['belum'] = false;
 
@@ -353,6 +355,7 @@ class Halaqah extends CI_Controller
         ON `data_halaqah`.`id_tutor` = `data_tutor`.`id` WHERE `data_halaqah`.`tahun` = $tahun AND `data_halaqah`.`jk` = '$jk' AND `data_halaqah`.`id_kelas` = '$idkelas' ORDER BY `data_halaqah`.`level` ASC";
 
         $data['halaqah'] = $this->db->query($query_halaqah)->result_array();
+
 
 
         $data['tahun'] = $tahun;

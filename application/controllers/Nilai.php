@@ -179,7 +179,9 @@ class Nilai extends CI_Controller
     {
 
         $this->load->model('Nilai_model');
+
         $data = $this->Nilai_model->get_data_nilai($tahun, $idkelas);
+
         $data['title'] = 'Daftar Nilai';
 
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();

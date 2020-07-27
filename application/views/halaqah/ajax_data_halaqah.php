@@ -24,7 +24,7 @@ foreach ($halaqah as $h) : ?>
             <?= $h['jumlah_anggota']; ?>
         </td>
         <td>
-            <a href="<?= base_url('halaqah/daftarmahasiswa/' . date('Y') . '/' . $h['id_kelas']); ?>?jk=<?= $h['jk']; ?>" class="badge badge-success">Edit</a>
+            <a href="<?= base_url('halaqah/daftarmahasiswa/' . $tahun . '/' . $h['id_kelas']); ?>?jk=<?= $h['jk']; ?>" class="badge badge-success">Edit</a>
         </td>
     </tr>
 <?php $i++;

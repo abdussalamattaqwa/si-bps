@@ -5,7 +5,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Kelas <?= $h['kelas']; ?></h6>
         </div>
         <div class="card-body">
-            <p class="card-text">Level <?= $h['level']; ?>.</p>
+            <p class="card-text">Halaqah <?= $h['level']; ?>.</p>
             <a href="<?= base_url('binaan/nilai/' . $h['id']); ?>" class="btn btn-primary">Pilih</a>
         </div>
     </div>

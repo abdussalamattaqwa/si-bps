@@ -9,8 +9,11 @@
     <div class="col-lg-6">
         <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
         <?= $this->session->flashdata('message'); ?>
+
+        <div class="alert alert-warning" role="alert">Apabila menu diubah, maka code programnya juga <b>harus</b> diubah</div>
+        <br>
         <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
-        <table class="table table-hover">
+        <table class="table table-hover text-gray-900">
             <thead>
                 <tr>
                     <th scope="col">#</th>

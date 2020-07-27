@@ -81,7 +81,8 @@
                                     <?= $h['jumlah_anggota']; ?>
                                 </td>
                                 <td>
-                                    <a href="<?= base_url('halaqah/daftarmahasiswa/' . date('Y') . '/' . $h['id_kelas']); ?>?jk=<?= $h['jk']; ?>" class="badge badge-success">Edit</a>
+                                    <?= $pilihan_angkatan; ?>
+                                    <a href="<?= base_url('halaqah/daftarmahasiswa/' . $pilihan_angkatan . '/' . $h['id_kelas']); ?>?jk=<?= $h['jk']; ?>" class="badge badge-success">Edit</a>
                                 </td>
                             </tr>
                         <?php $i++;

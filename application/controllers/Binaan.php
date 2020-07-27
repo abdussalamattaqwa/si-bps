@@ -25,15 +25,15 @@ class Binaan extends CI_Controller
         if ($dataTutor == null) {
             $dataTutor['id'] = null;
         }
+        $pilih_angkatan = (date('m') <= 8) ? date('Y') - 1 : date('Y');
 
         $this->db->select('data_halaqah.id, data_halaqah.level, daftar_kelas.kelas');
         $this->db->where('id_tutor', $dataTutor['id']);
         $this->db->from('data_halaqah');
         $this->db->join('daftar_kelas', 'daftar_kelas.id = data_halaqah.id_kelas');
-        $this->db->where('data_halaqah.tahun', date('Y'));
+        $this->db->where('data_halaqah.tahun', $pilih_angkatan);
         $data['halaqah'] = $this->db->get()->result_array();
 
-        $pilih_angkatan = (date('m') <= 8) ? date('Y') - 1 : date('Y');
 
         $this->db->select('tahun');
         $this->db->from('data_halaqah');
@@ -119,11 +119,11 @@ class Binaan extends CI_Controller
             'id' => $data['halaqah']['id_kelas']
         ])->row_array();
 
-
         $this->db->select('*, mahasiswa.id as idmhs');
         $this->db->from('mahasiswa');
         $this->db->join('nilai_sains', 'mahasiswa.id = nilai_sains.id_mahasiswa', 'left');
         $this->db->where('id_halaqah', $idhalaqah);
+        $this->db->order_by('nim', 'asc');
         $data['mahasiswa'] = $this->db->get()->result_array();
 
         $check = false;

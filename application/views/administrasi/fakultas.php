@@ -14,7 +14,7 @@
                         <?= $dj['jurusan']; ?>
                     </button>
 
-                    <div class="dropdown-menu" data-nama="<?= $dj['jurusan']; ?>" data-id="<?= $dj['id']; ?>" data-fakultas="<?= $dj['fakultas']; ?>">
+                    <div class="dropdown-menu" data-nama="<?= htmlspecialchars($dj['jurusan']); ?>" data-id="<?= $dj['id']; ?>" data-fakultas="<?= $dj['fakultas']; ?>">
                         <a href="" class="tambahProdi dropdown-item" data-toggle="modal" data-target="#Modal"> Tambah Program Studi</a>
                         <div class="dropdown-divider"></div>
                         <a href="" class="ubahJurusan dropdown-item" data-toggle="modal" data-target="#Modal"> Edit Jurusan</a>

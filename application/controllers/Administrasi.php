@@ -92,7 +92,7 @@ class Administrasi extends CI_Controller
         } else {
             $data = [
                 'tingkat' => 1,
-                'fakultas' => $this->input->post('fakultas')
+                'fakultas' => htmlspecialchars($this->input->post('fakultas'))
             ];
             $this->db->insert('daftar_kelas', $data);
 
@@ -145,6 +145,7 @@ class Administrasi extends CI_Controller
             'tingkat' => 2,
             'fakultas' => urldecode($fakultas)
         ])->result_array();
+
 
         foreach ($jurusan as $j) {
             $prodi = $this->db->get_where('daftar_kelas', [

@@ -43,7 +43,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered text-gray-900" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered text-gray-900" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th rowspan="2" class="text-center">No</th>

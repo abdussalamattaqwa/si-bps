@@ -49,7 +49,7 @@
                             <td><?= $dk['kelas']; ?></td>
                             <td><?= $dk['anggota']; ?></td>
                             <td>
-                                <a href="<?= base_url('halaqah/daftarmahasiswa/' . date('Y') . '/' . $dk['id']); ?>" class="badge badge-primary tombolPilih">Pilih</a>
+                                <a href="<?= base_url('halaqah/daftarmahasiswa/' . $pilihan_angkatan . '/' . $dk['id']); ?>" class="badge badge-primary tombolPilih">Pilih</a>
                             </td>
                         </tr>
                         <?php $i++; ?>

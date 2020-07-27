@@ -5,6 +5,8 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
 
+    <div class="alert alert-warning" role="alert">Apabila data sub menu diubah, maka code programnya juga <b>harus</b> diubah <br>
+        <b>Kecuali untuk data <i> <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank"> icon</a> dan active</i></b></div>
 
     <div class="col-lg">
         <?php if (validation_errors()) : ?>
@@ -28,7 +30,7 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-gray-900">
                 <?php $i = 1; ?>
                 <?php foreach ($subMenu as $sm) : ?>
 
