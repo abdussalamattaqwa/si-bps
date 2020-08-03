@@ -106,12 +106,26 @@
     const sAngkatan = document.querySelector('.select_angkatan');
     const tbody = document.querySelector('.tbodytable');
     const sSemester = document.querySelector('.select_semester');
+    let checkselect = false;
+    const select_jk = document.querySelector('.select_jk');
+    if (select_jk != null)
+        checkselect = true;
+
+    jk = '<?= $user['jk'] ?>';
+
 
     sAngkatan.addEventListener('change', function() {
+        // const select_jk = document.querySelector('.select_jk');
+        if (checkselect) {
+            jk = select_jk.selectedOptions[0].value;
+            // console.log(jk);
+        }
+        // console.log(jk);
+
         let tahun = sAngkatan.selectedOptions[0].text;
         let semester = sSemester.selectedOptions[0].text;
 
-        fetch(`<?= base_url('halaqah/ajax_data_halaqah/' . $fakultas); ?>?tahun=${tahun}&semester=${semester}`)
+        fetch(`<?= base_url('halaqah/ajax_data_halaqah/' . $fakultas); ?>?tahun=${tahun}&semester=${semester}&jk=${jk}`)
             .then(r => r.text())
             .then(r => {
                 tbody.innerHTML = r;
@@ -121,10 +135,17 @@
     });
 
     sSemester.addEventListener('change', function() {
+
+        if (checkselect) {
+            jk = select_jk.selectedOptions[0].value;
+            // console.log(jk);
+        }
+        // console.log(jk);
+
         let tahun = sAngkatan.selectedOptions[0].text;
         let semester = sSemester.selectedOptions[0].text;
 
-        fetch(`<?= base_url('halaqah/ajax_data_halaqah/' . $fakultas); ?>?tahun=${tahun}&semester=${semester}`)
+        fetch(`<?= base_url('halaqah/ajax_data_halaqah/' . $fakultas); ?>?tahun=${tahun}&semester=${semester}&jk=${jk}`)
             .then(r => r.text())
             .then(r => {
                 tbody.innerHTML = r;
@@ -135,7 +156,7 @@
 
     function select_gender() {
         const select_jk = document.querySelector('.select_jk');
-        let jk = select_jk.selectedOptions[0].value;
+        jk = select_jk.selectedOptions[0].value;
         let tahun = sAngkatan.selectedOptions[0].text;
         let semester = sSemester.selectedOptions[0].text;
 

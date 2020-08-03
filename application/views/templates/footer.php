@@ -1,8 +1,11 @@
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Developer by <i class="fab fa-instagram"></i> @abdussalam_attaqwa</span>
+        <div class="copyright text-center my-auto" style="font-size: 9px;">
+            <span>Developer by <i class="fab fa-instagram"></i> @abdussalam_attaqwa</span> <br>
+            <br>
+            <span>Pendidikan Teknik Informatika dan Komputer Angkatan 2016 FT UNM</span>
+
         </div>
     </div>
 </footer>

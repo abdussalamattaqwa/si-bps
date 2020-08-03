@@ -6,7 +6,6 @@
     <div class="row">
         <h1 class="h3 mb-4 text-gray-800 col-lg-3"><?= $title; ?></h1>
 
-
         <label for="angkatan" class="col-lg-1 col-form-label">Angkatan</label>
         <div class="col-lg-2">
             <select name="" id="" class="form-control select_angkatan">
@@ -21,7 +20,7 @@
 
             <select name="" id="" class="form-control select_semester">
                 <option <?= ($semester == 'Ganjil') ? 'selected' : ''; ?>>Ganjil</option>
-                <option <?= ($semester == 'Ganjil') ? 'selected' : ''; ?>>Genap</option>
+                <option <?= ($semester == 'Genap') ? 'selected' : ''; ?>>Genap</option>
             </select>
         </div>
 

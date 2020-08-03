@@ -22,6 +22,8 @@
 
     <a href class="btn btn-primary mb-3 text-gray-100" data-toggle="modal" data-target="#ModalTambah">Tambah Halaqah</a>
 
+    <a href='<?= base_url('halaqah/edit_anggota_halaqah/' . $tahun . '/' . $kelas['id']); ?>?jk=<?= $jk; ?>' class="btn btn-info mb-3 text-gray-100" target="_blank"><i class="fa fa-edit"></i> Edit Anggota Halaqah</a>
+
     <a href='<?= base_url('halaqah/printHalaqah/' . $tahun . '/' . $kelas['id']); ?>?jk=<?= $jk; ?>' class="btn btn-danger mb-3 text-gray-100" target="_blank"><i class="fa fa-print"></i> Print</a>
     <!-- <a href='<?= base_url('halaqah/pdfHalaqah/' . $tahun . '/' . $kelas['id']); ?>?jk=<?= $jk; ?>' class="btn btn-warning mb-3 text-gray-100" target="_blank"><i class="fa fa-file"></i> Export PDF</a>
     <a href='<?= base_url('halaqah/excelHalaqah/' . $tahun . '/' . $kelas['id']); ?>?jk=<?= $jk; ?>' class="btn btn-success mb-3 text-gray-100" target="_blank"><i class="fa fa-file-excel"></i> Export Excel</a> -->
@@ -71,9 +73,9 @@
                                                 </button>
                                                 <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
                                                     <?php foreach ($halaqah as $level) : ?>
-                                                        <a class="dropdown-item" href="<?= base_url('halaqah/pindahhalaqah/' . $tahun . '/' . $kelas['id'] . '/' . $level['id'] . '/' . $mhs['id']); ?>"><?= $level['level']; ?></a>
+                                                        <a class="dropdown-item" href="<?= base_url('halaqah/pindahhalaqah/' . $tahun . '/' . $kelas['id'] . '/' . $level['id'] . '/' . $mhs['id'] . '?jk=' . $jk); ?>"><?= $level['level']; ?></a>
                                                     <?php endforeach; ?>
-                                                    <a class="dropdown-item" href="<?= base_url('halaqah/pindahhalaqah/' . $tahun . '/' . $kelas['id'] . '/0/' . $mhs['id']); ?>">Belum ada</a>
+                                                    <a class="dropdown-item" href="<?= base_url('halaqah/pindahhalaqah/' . $tahun . '/' . $kelas['id'] . '/0/' . $mhs['id'] . '?jk=' . $jk); ?>">Belum ada</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -166,9 +168,9 @@
                                                     </button>
                                                     <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
                                                         <?php foreach ($halaqah as $level) : ?>
-                                                            <a class="dropdown-item" href="<?= base_url('halaqah/pindahhalaqah/' . $tahun . '/' . $kelas['id'] . '/' . $level['id'] . '/' . $mhs['id']); ?>"><?= $level['level']; ?></a>
+                                                            <a class="dropdown-item" href="<?= base_url('halaqah/pindahhalaqah/' . $tahun . '/' . $kelas['id'] . '/' . $level['id'] . '/' . $mhs['id']  . '?jk=' . $jk); ?>"><?= $level['level']; ?></a>
                                                         <?php endforeach; ?>
-                                                        <a class="dropdown-item" href="<?= base_url('halaqah/pindahhalaqah/' . $tahun . '/' . $kelas['id'] . '/0/' . $mhs['id']); ?>">Belum ada</a>
+                                                        <a class="dropdown-item" href="<?= base_url('halaqah/pindahhalaqah/' . $tahun . '/' . $kelas['id'] . '/0/' . $mhs['id'] . '?jk=' . $jk); ?>">Belum ada</a>
                                                     </div>
                                                 </div>
                                             </td>

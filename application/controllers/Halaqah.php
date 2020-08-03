@@ -135,7 +135,8 @@ class Halaqah extends CI_Controller
 
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['jk'] = $data['user']['jk'];
+
+        $data['jk'] = $_GET['jk'];
 
         $data['fakultas'] = $fakultas;
         $data['tahun'] = $_GET['tahun'];
@@ -151,22 +152,25 @@ class Halaqah extends CI_Controller
         $this->db->where('daftar_kelas.semester', $data['semester']);
 
         $data['status'] = search_user_role($data['user']['role_id']);
+
         if (isset($_GET['jk'])) {
             if ($data['status'] == 'dosen') {
                 $data['jk'] = $_GET['jk'];
                 if ($data['jk'] != 'semua')
                     $this->db->where('data_halaqah.jk', $data['jk']);
+            } else {
+                $this->db->where('data_halaqah.jk', $data['user']['jk']);
             }
         } else
             $this->db->where('data_halaqah.jk', $data['user']['jk']);
 
 
-        // $this->db->where('data_halaqah.jk', $data['user']['jk']);
-
 
         $this->db->order_by('kelas', 'asc');
 
         $data['halaqah'] = $this->db->get()->result_array();
+
+
         $i = 0;
         foreach ($data['halaqah'] as $h) :
             $idhalaqah = $h['id'];
@@ -320,7 +324,6 @@ class Halaqah extends CI_Controller
 
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        // $this->db->;
         $data['kelas'] = $this->db->get_where('daftar_kelas', ['id' => $idkelas])->row_array();
 
 
@@ -363,6 +366,74 @@ class Halaqah extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('halaqah/daftarmahasiswa', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function edit_anggota_halaqah($tahun, $idkelas)
+    {
+
+
+        $data['title'] = 'Daftar Halaqah';
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['kelas'] = $this->db->get_where('daftar_kelas', ['id' => $idkelas])->row_array();
+
+        $jk = $data['user']['jk'];
+        $status = search_user_role($data['user']['role_id']);
+        if ($status == 'dosen') {
+            if (isset($_GET['jk'])) {
+                $jk = $_GET['jk'];
+            }
+        }
+
+        $query = "SELECT `mahasiswa`.*, `daftar_kelas`.`kelas`, `nilai_sains`.`pre_test`, `nilai_sains`.`final_test` FROM mahasiswa 
+            JOIN `daftar_kelas` ON `mahasiswa`.`id_kelas` = `daftar_kelas`.`id` 
+            LEFT JOIN `nilai_sains` ON `mahasiswa`.`id` = `nilai_sains`.`id_mahasiswa`  WHERE `mahasiswa`.`id_kelas` = $idkelas AND `mahasiswa`.`angkatan` = $tahun AND `mahasiswa`.`jk` = '$jk' ORDER BY `mahasiswa`.`id`";
+
+        $data['mahasiswa'] = $this->db->query($query)->result_array();
+
+
+        $query_halaqah = "SELECT `data_halaqah`.*, `data_tutor`.`nama`, `data_tutor`.`telp` FROM `data_halaqah` LEFT JOIN `data_tutor` 
+            ON `data_halaqah`.`id_tutor` = `data_tutor`.`id` WHERE `data_halaqah`.`tahun` = $tahun AND `data_halaqah`.`jk` = '$jk' AND `data_halaqah`.`id_kelas` = '$idkelas' ORDER BY `data_halaqah`.`level` ASC";
+
+        $data['halaqah'] = $this->db->query($query_halaqah)->result_array();
+
+        $data['tahun'] = $tahun;
+        $data['jk'] = $jk;
+        $data['idkelas'] = $idkelas;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('halaqah/edit_anggota_halaqah', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function edit_anggota($tahun, $idkelas)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $jk = $data['user']['jk'];
+        $status = search_user_role($data['user']['role_id']);
+        if ($status == 'dosen') {
+            if (isset($_GET['jk'])) {
+                $jk = $_GET['jk'];
+            }
+        }
+
+        $query = "SELECT `mahasiswa`.*, `daftar_kelas`.`kelas`, `nilai_sains`.`pre_test`, `nilai_sains`.`final_test` FROM mahasiswa 
+            JOIN `daftar_kelas` ON `mahasiswa`.`id_kelas` = `daftar_kelas`.`id` 
+            LEFT JOIN `nilai_sains` ON `mahasiswa`.`id` = `nilai_sains`.`id_mahasiswa`  WHERE `mahasiswa`.`id_kelas` = $idkelas AND `mahasiswa`.`angkatan` = $tahun AND `mahasiswa`.`jk` = '$jk' ORDER BY `mahasiswa`.`id`";
+
+        $data['mahasiswa'] = $this->db->query($query)->result_array();
+
+        foreach ($data['mahasiswa'] as $mhs) {
+            $this->db->where('id', $mhs['id']);
+            $this->db->set('id_halaqah', $this->input->post($mhs['id']));
+            $this->db->update('mahasiswa');
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anggota halaqah berhasil diubah</div>');
+        redirect('halaqah/daftarmahasiswa/' . $tahun . '/' . $idkelas . '?jk=' . $jk);
     }
 
     public function tambahLevel($idkelas)
@@ -471,7 +542,7 @@ class Halaqah extends CI_Controller
         $this->db->set('id_halaqah', $idhalaqah);
         $this->db->where('id', $idmahasiswa);
         $this->db->update('mahasiswa');
-        redirect('halaqah/daftarmahasiswa/' . $tahun . '/' . $idkelas);
+        redirect('halaqah/daftarmahasiswa/' . $tahun . '/' . $idkelas . '?jk=' . $_GET['jk']);
     }
 
     public function printHalaqah($tahun, $idkelas)
