@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-sm-8">
-            <form method="post" action="<?= ($status == 'dosen') ? base_url('dosen/update_dosen') : base_url('tutor/update_tutor'); ?>">
+            <form method="post" action="<?= ($status == 'dosen') ? base_url('dosen/edit_dosen/' . $user_edit['id_user']) : base_url('tutor/edit_tutor/' . $user_edit['id_user']); ?>">
 
 
                 <input type="hidden" name="idUser" value="<?= $user_edit['id_user']; ?>">
@@ -101,11 +101,13 @@
                         <label for="nip" class="col-sm-2 col-form-label">NIP</label>
                         <div class="col-sm-10">
                             <input type="text" name="nip" id="nip" class="form-control" placeholder="NIP" value="<?= $user_edit['nip']; ?>">
+                            <?= form_error('nip', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                     <?php } else { ?>
                         <label for="nim" class="col-sm-2 col-form-label">NIM</label>
                         <div class="col-sm-10">
                             <input type="text" name="nim" id="nim" class="form-control" placeholder="NIM" value="<?= $user_edit['nim']; ?>">
+                            <?= form_error('nim', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                 </div>
 
@@ -128,6 +130,7 @@
                     <label for="telp" class="col-sm-2 col-form-label">No. Telephone</label>
                     <div class="col-sm-10">
                         <input type="text" name="telp" id="telp" class="form-control" placeholder="No. Telephone" value="<?= $user_edit['telp']; ?>">
+                        <?= form_error('telp', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
 

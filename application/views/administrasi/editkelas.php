@@ -45,9 +45,9 @@
                             <th scope="row"> <?= $i; ?> </th>
                             <td><?= $dk['kelas']; ?></td>
                             <td>
-                                <a href="" class="badge badge-success editKelas" data-toggle="modal" data-target="#modalEdit" data-id="<?= $dk['id']; ?>" data-kelas="<?= $dk['kelas']; ?>">Edit</a>
+                                <a href="" class="btn btn-success btn-sm editKelas" data-toggle="modal" data-target="#modalEdit" data-id="<?= $dk['id']; ?>" data-kelas="<?= $dk['kelas']; ?>"><i class="fas fa-fw fa-edit"></i> Edit</a>
 
-                                <a href="" class="badge badge-danger deleteKelas" data-toggle="modal" data-target="#hapusModal" data-id="<?= $dk['id']; ?>" data-anggota=<?= $dk['anggota']; ?>>Delete</a>
+                                <a href="" class="btn btn-danger btn-sm deleteKelas" data-toggle="modal" data-target="#hapusModal" data-id="<?= $dk['id']; ?>" data-anggota=<?= $dk['anggota']; ?>><i class="fas fa-fw fa-trash"></i> Delete</a>
                             </td>
                         </tr>
                         <?php $i++; ?>

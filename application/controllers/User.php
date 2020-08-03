@@ -46,12 +46,26 @@ class User extends CI_Controller
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->form_validation->set_rules('name', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim');
+        $this->form_validation->set_rules('nim', 'NIM', 'trim|numeric|max_length[12]');
+        $this->form_validation->set_rules('telp', 'Telephone', 'trim|numeric|max_length[12]');
+        $this->form_validation->set_rules('nim', 'NIP', 'trim|numeric');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules(
             'username',
             'Username',
             'required|trim'
         );
+
+        $err = false;
+        $errnama = '';
+        if (isset($_POST['name'])) {
+            if (!ctype_alpha(str_replace(' ', '', $_POST['name']))) {
+                $err = true;
+
+                $errnama = '<div class="alert alert-warning" role="alert">Nama harus menggunakan huruf, dan tidak boleh mengandung angka, dimbol, dll</div';
+                $this->session->set_flashdata('message', $errnama);
+            }
+        }
 
         if ($this->form_validation->run()  == false) {
 
@@ -83,11 +97,16 @@ class User extends CI_Controller
             $this->load->view('user/edit', $data);
             $this->load->view('templates/footer');
         } else {
+
+            if ($err) {
+                $this->session->set_flashdata('message', $errnama);
+                redirect('user/edit');
+            }
             $iduser = $this->input->post('id_user');
             $upload_image = $_FILES['image']['name'];
             if ($upload_image) {
                 $config['allowed_types'] = 'gif|jpg|png';
-                $config['max_size'] = '2048';
+                $config['max_size'] = '1048';
                 $config['upload_path'] = './assets/img/profile/';
 
                 $this->load->library('upload', $config);
@@ -111,7 +130,7 @@ class User extends CI_Controller
             if ($user['username'] != $username) {
                 $registrasiUsername = $this->db->get_where('user', ['username' => $username])->num_rows();
                 if ($registrasiUsername >= 1) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Username Telah digunakan, Data <b>' . $user["name"] . '</b> gagal diubah.</div>');
+                    $this->session->set_flashdata('message', $errnama . '<div class="alert alert-warning" role="alert">Username Telah digunakan, Data <b>' . $user["name"] . '</b> gagal diubah.</div>');
                     redirect('user/edit');
                 }
             }
@@ -120,20 +139,24 @@ class User extends CI_Controller
             if ($user['email'] != $email) {
                 $registrasiUsername = $this->db->get_where('user', ['email' => $email])->num_rows();
                 if ($registrasiUsername >= 1) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Email telah digunakan, Data <b>' . $user["name"] . '</b> gagal diubah.</div>');
+                    $this->session->set_flashdata('message', $errnama . '<div class="alert alert-warning" role="alert">Email telah digunakan, Data <b>' . $user["name"] . '</b> gagal diubah.</div>');
                     redirect('user/edit');
                 }
             }
 
-
             $dataUser = [
                 'name' => htmlspecialchars($this->input->post('name')),
+                'email' => htmlspecialchars($this->input->post('email')),
                 'username' => htmlspecialchars($this->input->post('username'))
             ];
             $this->db->set($dataUser);
             $this->db->where('id', $iduser);
             $this->db->update('user');
-
+            $datasession = [
+                'email' => htmlspecialchars($this->input->post('email')),
+                'role_id' => $user['role_id']
+            ];
+            $this->session->set_userdata($datasession);
 
             if ($this->input->post('nip') || $this->input->post('nim')) {
 
@@ -184,8 +207,8 @@ class User extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim');
-        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[3]|matches[new_password2]');
-        $this->form_validation->set_rules('new_password2', 'Confirm New Password', 'required|trim|min_length[3]|matches[new_password1]');
+        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[6]|matches[new_password2]');
+        $this->form_validation->set_rules('new_password2', 'Confirm New Password', 'required|trim|min_length[6]|matches[new_password1]');
 
 
         if ($this->form_validation->run() == false) {

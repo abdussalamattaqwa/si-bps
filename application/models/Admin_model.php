@@ -82,7 +82,9 @@ class Admin_model extends CI_Model
 
     public function get_user_role()
     {
-        return $this->db->get('user_role')->result_array();
+        $this->db->from('user_role');
+        $this->db->where('id != 1');
+        return $this->db->get()->result_array();
     }
 
     public function insert_user($data, $role_id)

@@ -3,6 +3,7 @@
 
 <head>
 
+
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?= base_url('assets/'); ?>/img/favicomatic/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= base_url('assets/'); ?>/img/favicomatic/apple-touch-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= base_url('assets/'); ?>/img/favicomatic/apple-touch-icon-72x72.png" />
@@ -23,186 +24,180 @@
     <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
     <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
-
-
     <title>Halaqah <?= ($jk == 'L') ? 'Ikhwah' : 'Akhwat'; ?> Kelas <?= $kelas['kelas']; ?> Semester <?= $kelas['semester'] . '/' . $tahun; ?></title>
 
+    <style type="text/css">
+        /* <!-- */
+        .style4 {
+            font-size: 9px
+        }
 
-    <!-- Custom styles for this template-->
-    <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
+        .style6 {
+            font-size: 11px
+        }
 
-    <style>
-        @page {
-            size: A4;
+        .style7 {
+            font-size: 16px
+        }
+
+        .style8 {
             font-size: 12pt;
-            /* position: relative; */
-            margin: auto;
+            color: #000000;
+        }
+
+        .style9 {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .style10 {
+            font-size: 14px
+        }
+
+        .border th,
+        .border td {
+            border: solid 1px black;
+            padding: 8pt 3pt;
         }
 
         body {
             margin: 0;
             padding: 0;
-        }
-
-        .header {
-            width: 23cm;
-            margin: auto;
-            margin-bottom: 0;
-            text-align: center;
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 10px;
-            font-size: 14pt;
-            margin-top: 5px;
-            position: relative;
-        }
-
-        .header p:nth-child(1) {
-            font-size: 16pt;
-        }
-
-        .header .h12 {
             font-size: 12pt;
         }
 
-        .header img {
-            top: -12px;
-            width: 3cm;
-            position: absolute;
+        @page {
+            size: A4;
         }
 
-        .header img.logo-unm {
-            left: 0;
-            margin-left: 30px;
-        }
-
-        .header img.logo-bps {
-            right: 0;
-            margin-right: 30px;
-        }
-
-
-        .isi {
-            width: 21cm;
-            margin: auto;
-            font-family: 'Times New Roman', Times, serif;
-        }
-
-        .table thead th,
-        .table tbody td {
-            border: solid 1px black !important;
-        }
-
-        @media print {
-            .isi {
-                color: black !important;
-            }
-
-            .table {
-                color: black !important;
-            }
-        }
+        /* --> */
     </style>
 </head>
 
 <body>
+    <div id="isi" width="210mm">
+        <table border="0" align="center" style="border-spacing: -1px; border-collapse: collapse;">
+            <tr>
+                <td colspan="2" scope="row" align="center"><img src="<?= base_url('assets/'); ?>img/logo-unm.png" width="77" height="77"></td>
+                <td colspan="14" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">
+                    <div align="center" class="style7">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN <br />
+                        UNIVERSITAS NEGERI MAKASSAR<br />
+                        UNIT PELAKSANA TEKNIS MATA KULIAH UMUM<br />
+                        BADAN PELAKSANA SAINS<br />
+                        <div align="center"><span class="style6">Sekretariat : Masjid Ulil Albab Parang Tambung UNM, Makassar. KP. 90220 Telp. 085255549154</span></div>
+                    </div>
+                </td>
+                <td colspan="2" scope="row"><img src="<?= base_url('assets/'); ?>img/logo-bps.png" width="77" height="77"></td>
+            </tr>
+            <tr>
+                <td colspan="18" scope="row">
+                    <hr color="black" alt="" height="1" />
+                </td>
+            </tr>
+            <tr height="10">
+                <td></td>
+            </tr>
 
-    <div class="text-gray-900">
-        <div class="header">
-            <img src="<?= base_url('assets/'); ?>img/logo-unm.png" alt="" class="logo-unm">
-            <p>KEMENTRIAN PENDIDIKAN DAN KEBUDAYAAN</p>
-            <p>UNIVERSITAS NEGERI MAKASSAR (UNM)</p>
-            <p>UNIT PELAKSANA TEKNIS MATA KULIAH UMUM</p>
-            <p>BADAN PELAKSANA SAINS</p>
-            <p class="h12" style="margin-top: -6px;">Sekretariat : Masjid Ulil Albab Parang Tambung UNM, Makassar. KP. 90220 Telp. 085255549154</p>
-            <img src="<?= base_url('assets/'); ?>img/logo-bps.png" alt="" class="logo-bps">
-            <hr>
+            <tr>
+                <td colspan="18" align="center">
+                    <div style=" font-family:Times New Roman; font-size:14pt; color:#000000;">Daftar Halaqah <?= ($jk == 'L') ? 'Ikhwah' : 'Akhwat'; ?></div>
+                </td>
+            </tr>
 
-        </div>
+            <tr height="18">
+                <td><br></td>
+            </tr>
 
+            <tr>
+                <td scope="row" colspan="2">Semester/Tahun</td>
+                <td colspan="14" align="left">: <?= $kelas['semester'] . '/' . $tahun; ?></td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="2">Fakultas</td>
+                <td colspan="14" align="left">: <?= $kelas['fakultas']; ?></td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="2">Prodi</td>
+                <td colspan="14" align="left">: <?= $kelas['prodi']; ?></td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="2">Kelas</td>
+                <td colspan="14" align="left">: <?= $kelas['kelas']; ?></td>
+            </tr>
 
-
-
-        <div class="isi">
-            <h2 class="text-center">Daftar Halaqah <?= ($jk == 'L') ? 'Ikhwah' : 'Akhwat'; ?></h2>
-            <table>
-                <tr>
-                    <td style="width: 150px;">Semester/tahun</td>
-                    <td>: <?= $kelas['semester'] . '/' . $tahun; ?></td>
-                </tr>
-                <tr>
-                    <td>Fakultas</td>
-                    <td>: <?= $kelas['fakultas']; ?></td>
-                </tr>
-                <tr>
-                    <td>Jurusan</td>
-                    <td>: <?= $kelas['jurusan']; ?></td>
-                </tr>
-
-                <tr>
-                    <td>Prodi</td>
-                    <td>: <?= $kelas['prodi']; ?></td>
-                </tr>
-                <tr>
-                    <td>Kelas</td>
-                    <td>: <?= $kelas['kelas']; ?></td>
-                </tr>
-            </table>
-
-            <br>
             <?php
             foreach ($halaqah as $h) : ?>
+                <tr height="18">
+                    <td></td>
+                </tr>
+                <tr>
+                    <td scope="row" colspan="2">Tutor</td>
+                    <td colspan="14" align="left">: <?= $h['nama']; ?></td>
+                </tr>
+                <tr>
+                    <td scope="row" colspan="2">No. Telp</td>
+                    <td colspan="14" align="left">: <?= $h['telp']; ?></td>
+                </tr>
+                <tr>
+                    <td scope="row" colspan="2">Halaqah</td>
+                    <td colspan="14" align="left">: <?= $h['level']; ?></td>
+                </tr>
 
-                <table>
-                    <tr>
-                        <td style="width: 150px;">Tutor</td>
-                        <td>: <?= $h['nama']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>No.Telp</td>
-                        <td>: <?= $h['telp']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Halaqah</td>
-                        <td>: <?= $h['level']; ?></td>
-                    </tr>
-                </table>
 
-                <table class="text-gray-900 table table-bordered" style="width: 700px;">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="width: 80px;">No</th>
-                            <th scope="col" style="width: 250px;">Nim</th>
-                            <th scope="col">Nama</th>
 
+                <tr class="border">
+                    <th scope="col" align="center" width="20">No</th>
+                    <th scope="col" colspan="2" width="50">Nim</th>
+                    <th scope="col" colspan="2" width="100">Nama</th>
+                </tr>
+                <?php
+                $i = 1;
+                foreach ($mahasiswa as $mhs) : ?>
+                    <?php if ($mhs['id_halaqah'] == $h['id']) : ?>
+                        <tr class="border">
+                            <td align="center"><?= $i; ?></td>
+                            <td colspan="2"><?= $mhs['nim']; ?></td>
+                            <td colspan="2"><?= $mhs['nama']; ?></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $i = 1;
-                        foreach ($mahasiswa as $mhs) : ?>
-                            <?php if ($mhs['id_halaqah'] == $h['id']) : ?>
-                                <tr>
-                                    <td><?= $i; ?></td>
-                                    <td><?= $mhs['nim']; ?></td>
-                                    <td><?= $mhs['nama']; ?></td>
-                                </tr>
-                        <?php $i++;
-                            endif;
+                <?php $i++;
+                    endif;
 
-                        endforeach; ?>
+                endforeach; ?>
 
-                    </tbody>
-                </table>
-                <br>
             <?php endforeach; ?>
-            <b> Catatan </b>
-            <ul>
-                <li> Harap perwakilan halaqah menelpon tutor masing-masing untuk menentukan jadwal pekanannya</li>
-                <li> Pertemuan pekanan antara senin sampai jum'at</li>
-            </ul>
+            <tr height="13">
+                <td><br></td>
+            </tr>
+            <tr height="13">
+                <td><br></td>
+            </tr>
+            <tr>
+                <td colspan="16">
+                    <b> Catatan </b>
+                </td>
 
+            </tr>
+            <tr>
+                <td>
+                    <li></li>
+                </td>
+                <td colspan="17" width="180">
+                    Harap perwakilan halaqah menelpon tutor masing-masing untuk menentukan jadwal pekanannya
+                </td>
+            </tr>
+            <tr height="">
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <li></li>
+                </td>
+                <td colspan="17" width="180">
+                    Pertemuan pekanan antara senin sampai jum'at
+                </td>
+            </tr>
+        </table>
 
-        </div>
     </div>
 
     <script>

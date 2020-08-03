@@ -51,43 +51,46 @@
     </div>
 
     <br>
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered text-gray-900 tbody" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Kelas</th>
-                            <th scope="col">Nama</th>
-                            <?php if ($jk == 'semua')
-                                echo '<th scope="col">JK</th>' ?>
-                            <th scope="col">Tutor</th>
-                            <th scope="col">Anggota</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1;
-                        foreach ($halaqah as $h) : ?>
+    <div class="tbodytable">
+
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-gray-900 tbody" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
-                                <th scope="row"><?= $i; ?></th>
-                                <td><?= $h['kelas']; ?></td>
-                                <td><?= $h['level']; ?></td>
+                                <th scope="col">No</th>
+                                <th scope="col">Kelas</th>
+                                <th scope="col">Nama</th>
                                 <?php if ($jk == 'semua')
-                                    echo '<td>' . $h['jk'] . '</td>' ?>
-                                <td><?= $h['nama']; ?></td>
-                                <td>
-                                    <?= $h['jumlah_anggota']; ?>
-                                </td>
-                                <td>
-                                    <?= $pilihan_angkatan; ?>
-                                    <a href="<?= base_url('halaqah/daftarmahasiswa/' . $pilihan_angkatan . '/' . $h['id_kelas']); ?>?jk=<?= $h['jk']; ?>" class="badge badge-success">Edit</a>
-                                </td>
+                                    echo '<th scope="col">JK</th>' ?>
+                                <th scope="col">Tutor</th>
+                                <th scope="col">Anggota</th>
+                                <th scope="col">Aksi</th>
                             </tr>
-                        <?php $i++;
-                        endforeach; ?>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1;
+                            foreach ($halaqah as $h) : ?>
+                                <tr>
+                                    <th scope="row"><?= $i; ?></th>
+                                    <td><?= $h['kelas']; ?></td>
+                                    <td><?= $h['level']; ?></td>
+                                    <?php if ($jk == 'semua')
+                                        echo '<td>' . $h['jk'] . '</td>' ?>
+                                    <td><?= $h['nama']; ?></td>
+                                    <td>
+                                        <?= $h['jumlah_anggota']; ?>
+                                    </td>
+                                    <td>
+                                        <?= $pilihan_angkatan; ?>
+                                        <a href="<?= base_url('halaqah/daftarmahasiswa/' . $pilihan_angkatan . '/' . $h['id_kelas']); ?>?jk=<?= $h['jk']; ?>" class="btn btn-success btn-sm"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                                    </td>
+                                </tr>
+                            <?php $i++;
+                            endforeach; ?>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -101,7 +104,7 @@
 
 <script>
     const sAngkatan = document.querySelector('.select_angkatan');
-    const tbody = document.querySelector('.tbody');
+    const tbody = document.querySelector('.tbodytable');
     const sSemester = document.querySelector('.select_semester');
 
     sAngkatan.addEventListener('change', function() {
@@ -110,9 +113,11 @@
 
         fetch(`<?= base_url('halaqah/ajax_data_halaqah/' . $fakultas); ?>?tahun=${tahun}&semester=${semester}`)
             .then(r => r.text())
-            .then(r => tbody.innerHTML = r);
-
-        // window.location = `<?= base_url('halaqah/fakultas/' . $fakultas); ?>?tahun=${pilihanAngkatan}`;
+            .then(r => {
+                tbody.innerHTML = r;
+                $('#dataTable').DataTable();
+            });
+        $('#dataTable').DataTable();
     });
 
     sSemester.addEventListener('change', function() {
@@ -121,7 +126,10 @@
 
         fetch(`<?= base_url('halaqah/ajax_data_halaqah/' . $fakultas); ?>?tahun=${tahun}&semester=${semester}`)
             .then(r => r.text())
-            .then(r => tbody.innerHTML = r);
+            .then(r => {
+                tbody.innerHTML = r;
+                $('#dataTable').DataTable();
+            });
 
     });
 
@@ -133,10 +141,9 @@
 
         fetch(`<?= base_url('halaqah/ajax_data_halaqah/' . $fakultas); ?>?tahun=${tahun}&semester=${semester}&jk=${jk}`)
             .then(r => r.text())
-            .then(r => tbody.innerHTML = r);
-        // console.log(jk);
-
-        // window.open(`?jk=${jk}`, '_self');
-
+            .then(r => {
+                tbody.innerHTML = r;
+                $('#dataTable').DataTable();
+            });
     }
 </script>

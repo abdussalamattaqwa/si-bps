@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="level" class="col-sm-2 col-form-label">Level</label>
+        <label for="level" class="col-sm-2 col-form-label">Halaqah</label>
         <div class="col-sm-6">
             <input type="text" name="level" id="level" class="form-control" value="<?= $halaqah['level']; ?>" readonly>
         </div>
@@ -36,7 +36,9 @@
 
     <button class="btn btn-primary text-gray-100 mb-3" data-toggle="modal" data-target="#tambahModal">Tambah Mahasiswa</button>
     <?= $this->session->flashdata('message'); ?>
-
+    <?= form_error('name', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+    <?= form_error('nim', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+    <?= form_error('telp', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Daftar Mahasiswa</h6>
@@ -81,7 +83,7 @@
                                 <td><?= $mhs['tugas']; ?></td>
                                 <td><?= $mhs['akhir']; ?></td>
                                 <td><?= $mhs['huruf']; ?></td>
-                                <td data-id="<?= $mhs['idmhs']; ?>"><a href="" class="badge badge-success edit-mahasiswa" data-toggle="modal" data-target="#editModal">Edit</a> <a href="" class="badge badge-danger hapus-mahasiswa" data-toggle="modal" data-target="#hapusModal">Delete</a></td>
+                                <td data-id="<?= $mhs['idmhs']; ?>"><a href="" class="btn btn-success btn-sm edit-mahasiswa" data-toggle="modal" data-target="#editModal"><i class="fas fa-fw fa-edit"></i> Edit</a> <a href="" class="btn btn-danger btn-sm hapus-mahasiswa" data-toggle="modal" data-target="#hapusModal"><i class="fas fa-fw fa-trash"></i> Delete</a></td>
 
                             </tr>
                         <?php
@@ -115,7 +117,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('binaan/tambahmahasiswa/' . $kelas['id'] . '/' . $halaqah['id']); ?>" method="post">
+            <form action="" method="post">
                 <div class="modal-body">
 
                     <div class="form-group">

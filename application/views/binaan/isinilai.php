@@ -18,7 +18,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="kelas" class="col-sm-2 col-form-label">Level</label>
+        <label for="kelas" class="col-sm-2 col-form-label">Halaqah</label>
         <div class="col-sm-6">
             <input type="text" name="kelas" id="kelas" class="form-control" value="<?= $halaqah['level']; ?>" readonly>
         </div>
@@ -27,12 +27,12 @@
     <form method="POST" action="<?= base_url('binaan/input/' . $jenis_nilai . '/' . $halaqah['idhalaqah']); ?>">
         <div class="row">
             <div class="col-lg-8">
-                <table class="table table-hover text-gray-900 text-center">
+                <table class="table table-hover text-gray-900 table-responsive" style="margin: auto;">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nim</th>
-                            <th>Nama</th>
+                            <th width="150px">Nim</th>
+                            <th width="200px">Nama</th>
                             <th>Nilai <?= $jenis_nilai; ?></th>
 
                         </tr>
@@ -60,11 +60,11 @@
                 </table>
             </div>
         </div>
+        <br>
         <div class="row">
-            <div class="col-sm-5">
+            <br>
 
-            </div>
-            <div class="col-sm-2 col-sm-offset-2">
+            <div class="col-sm-2 ">
                 <button type="submit" class="btn-modal btn btn-primary btn-block">
                     Simpan
                 </button>

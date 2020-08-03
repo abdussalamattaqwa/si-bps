@@ -36,12 +36,12 @@
                                 <td><?= $dtDosen['role']; ?></td>
                                 <td data-id="<?= $dtDosen['id']; ?>" data-idUser="<?= $dtDosen['id_user']; ?>">
                                     <!-- Tombol Edit -->
-                                    <a href="" class="badge badge-primary detail-dosen" data-toggle="modal" data-target="#ModalDetail">Detail</a>
+                                    <a href="" class="btn btn-primary btn-sm detail-dosen" data-toggle="modal" data-target="#ModalDetail" title="View"><i class="fas fa-fw fa-info-circle"></i> Detail</a>
 
                                     <?php if ($user['role_id'] <= 4 && $user['id'] != $dtDosen['id_user']) : ?>
-                                        <a href="<?= base_url('Dosen/edit_dosen/' . $dtDosen['id_user'] . '/' . $dtDosen['id']); ?>" class="badge badge-success editDosen">Edit</a>
+                                        <a href="<?= base_url('Dosen/edit_dosen/' . $dtDosen['id_user'] . '/' . $dtDosen['id']); ?>" class="btn btn-success  btn-sm editDosen"><i class="fas fa-fw fa-edit" title="Edit"></i> Edit</a>
 
-                                        <a href="" class=" badge badge-danger deleteDosen" data-toggle="modal" data-target="#hapusModal">Delete
+                                        <a href="" class=" btn btn-danger btn-sm deleteDosen" data-toggle="modal" data-target="#hapusModal"> <i class="fas fa-fw fa-trash" title="Delete"></i> Delete
                                         </a>
                                     <?php endif; ?>
                                 </td>

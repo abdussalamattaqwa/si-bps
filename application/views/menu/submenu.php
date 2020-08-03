@@ -17,7 +17,7 @@
         <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
         <?= $this->session->flashdata('message'); ?>
 
-        <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Add New Submenu</a>
+        <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Tambah Submenu</a>
         <table class="table table-hover text-gray-900 table-responsive">
             <thead>
                 <tr>
@@ -47,10 +47,10 @@
                             } ?></td>
                         <td>
                             <!-- Tombol Edit -->
-                            <a href="" class="badge badge-success editSubMenu" data-toggle="modal" data-target="#EditModal" data-id=<?= $sm['id']; ?>>edit</a>
+                            <a href="" class="btn btn-success btn-sm editSubMenu" data-toggle="modal" data-target="#EditModal" data-id=<?= $sm['id']; ?> title="Edit"><i class="fas fa-fw fa-edit"></i> Edit</a>
 
                             <!-- Tombol Delete -->
-                            <a href="" class="badge badge-danger deleteSubMenu" data-id="<?= $sm['id']; ?>" data-toggle="modal" data-target="#hapusModal">delete</a>
+                            <a href="" class="btn btn-danger btn-sm deleteSubMenu" data-id="<?= $sm['id']; ?>" data-toggle="modal" data-target="#hapusModal" title="Delete"><i class="fas fa-fw fa-trash"></i> Delete</a>
                         </td>
                     </tr>
                     <?php $i++; ?>

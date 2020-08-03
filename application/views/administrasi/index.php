@@ -31,10 +31,10 @@
                             <td><?= $i; ?></td>
                             <td><?= $f['fakultas']; ?></td>
                             <td data-nama="<?= $f['fakultas']; ?>">
-                                <a href=" <?= base_url('administrasi/fakultas/' . $f['fakultas']); ?>" class="badge badge-primary ">Pilih
+                                <a href=" <?= base_url('administrasi/fakultas/' . $f['fakultas']); ?>" class="btn btn-primary btn-sm"> <i class="fas fa-fw fa-mouse-pointer"></i> Pilih
                                 </a>
-                                <a href="" class="ubahFakultas badge badge-success" data-toggle="modal" data-target="#Modal" data-id="<?= $f['id']; ?>"> Edit </a>
-                                <a href="" class="hapusFakultas badge badge-danger" data-toggle="modal" data-target="#hapusModal"> Delete </a>
+                                <a href="" class="ubahFakultas btn btn-success btn-sm" data-toggle="modal" data-target="#Modal" data-id="<?= $f['id']; ?>"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                                <a href="" class="hapusFakultas btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusModal"> <i class="fas fa-fw fa-trash"></i> Delete </a>
                             </td>
                         </tr>
                     <?php $i++;

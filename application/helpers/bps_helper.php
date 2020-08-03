@@ -9,6 +9,10 @@ function is_logged_in()
         $role_id = $ci->session->userdata('role_id');
         $menu = $ci->uri->segment(1);
 
+        if (in_array(strtolower($ci->uri->segment(1)), ['dosen', 'tutor', 'halaqah'])) {
+            $menu = 'administrasi';
+        }
+
         $queryMenu = $ci->db->get_where('user_menu', ['menu' => $menu])->row_array();
 
         $menu_id = $queryMenu['id'];
@@ -49,6 +53,8 @@ function search_user_role($role_id)
         //  Control Tutor Function tambah tutor diubah juga
         //  Control Tutor Function edit tutor diubah juga
         return 'tutor';
+    } else if ($role_id == 1) {
+        return 'admin';
     } else {
         return 'user';
     }

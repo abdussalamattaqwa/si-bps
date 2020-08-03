@@ -84,6 +84,13 @@ class Administrasi extends CI_Controller
     public function tambahfakultas()
     {
 
+        $fakultas = $this->input->post('fakultas');
+        if (!ctype_alpha(str_replace(' ', '', $fakultas))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Fakultas harus diisi dengan huruf alphabet saja, data Fakultas gagal ditambahkan</div>');
+            redirect('administrasi');
+        }
+
+
         $is_same = $this->db->get_where('daftar_kelas', ['tingkat' => 1, 'fakultas' => $this->input->post('fakultas')])->row_array()['fakultas'];
 
         if ($is_same != null) {
@@ -104,6 +111,11 @@ class Administrasi extends CI_Controller
 
     public function ubahFakultas($fakultas)
     {
+        $fakultas = $this->input->post('fakultas');
+        if (!ctype_alpha(str_replace(' ', '', $fakultas))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Fakultas harus diisi dengan huruf alphabet saja, data Fakultas gagal diubah</div>');
+            redirect('administrasi');
+        }
 
         $is_same = $this->db->get_where('daftar_kelas', ['tingkat' => 1, 'fakultas' => $this->input->post('fakultas')])->row_array()['fakultas'];
 
@@ -121,6 +133,11 @@ class Administrasi extends CI_Controller
 
     public function tambahJurusan($fakultas)
     {
+        $jurusan = $this->input->post('jurusan');
+        if (!ctype_alpha(str_replace(' ', '', $jurusan))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Jurusan harus diisi dengan huruf alphabet saja, data Jurusan gagal ditambahkan</div>');
+            redirect('administrasi/fakultas/' . urldecode($fakultas));
+        }
 
         $data = [
             'tingkat' => 2,
@@ -182,8 +199,13 @@ class Administrasi extends CI_Controller
         redirect('administrasi');
     }
 
-    public function ubahjurusan($fakultas, $jurusan, $id)
+    public function ubahjurusan($fakultas, $jurusan)
     {
+        $jurusan = $this->input->post('jurusan');
+        if (!ctype_alpha(str_replace(' ', '', $jurusan))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Jurusan harus diisi dengan huruf alphabet saja, data Jurusan gagal diubah</div>');
+            redirect('administrasi/fakultas/' . urldecode($fakultas));
+        }
         $is_same = $this->db->get_where('daftar_kelas', [
             'tingkat' => 2,
             'fakultas' => urldecode($fakultas),
@@ -204,6 +226,12 @@ class Administrasi extends CI_Controller
 
     public function tambahProdi($fakultas, $jurusan)
     {
+        $prodi = $this->input->post('prodi');
+        if (!ctype_alpha(str_replace(' ', '', $prodi))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Prodi harus diisi dengan huruf alphabet saja, data Prodi gagal ditambahkan</div>');
+            redirect('administrasi/fakultas/' . urldecode($fakultas));
+        }
+
         $data = [
             'tingkat'   => 3,
             'fakultas'  => urldecode($fakultas),
@@ -259,6 +287,13 @@ class Administrasi extends CI_Controller
 
     public function ubahprodi($fakultas, $id)
     {
+
+        $prodi = $this->input->post('prodi');
+        if (!ctype_alpha(str_replace(' ', '', $prodi))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Prodi harus diisi dengan huruf alphabet saja, data Prodi gagal diubah</div>');
+            redirect('administrasi/fakultas/' . urldecode($fakultas));
+        }
+
         $is_same = $this->db->get_where('daftar_kelas', ['prodi' => $this->input->post('prodi')])->row_array()['prodi'];
         if ($is_same != null) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Prodi telah ada, data gagal diubah </div>');
@@ -356,6 +391,13 @@ class Administrasi extends CI_Controller
 
     public function tambahKelas($id)
     {
+
+        $kelas = $this->input->post('kelas');
+        if (!ctype_alpha(str_replace(' ', '', $kelas))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kelas harus diisi dengan huruf alphabet saja, data Kelas gagal ditambahkan</div>');
+            redirect('administrasi/daftarkelas/' . $id);
+        }
+
         $data = [
             'tingkat'   => 4,
             'fakultas'  => $this->input->post('fakultas'),
@@ -372,6 +414,12 @@ class Administrasi extends CI_Controller
 
     public function editKelas($id)
     {
+        $kelas = $this->input->post('kelas');
+        if (!ctype_alpha(str_replace(' ', '', $kelas))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kelas harus diisi dengan huruf alphabet saja, data Kelas gagal diubah</div>');
+            redirect('administrasi/daftarkelas/' . $id);
+        }
+
         $this->db->set('kelas', $this->input->post('kelas'));
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('daftar_kelas');

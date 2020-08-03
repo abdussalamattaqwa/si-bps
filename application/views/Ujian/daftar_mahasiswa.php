@@ -32,14 +32,16 @@
 
 
     <a href="" class="btn btn-primary mb-3 btn-tambah-mhs" data-toggle="modal" data-target="#ModalTambah">Tambah Mahasiswa</a>
-
+    <?= form_error('nim', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+    <?= form_error('nama', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+    <?= form_error('telp', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
     <?= $this->session->flashdata('message'); ?>
 
 
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered text-gray-900" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered text-gray-900" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -74,9 +76,9 @@
                                     <a href="<?= base_url('ujian/test/final_test/' . $proses . '/' . $kelas['id'] . '/' . $mhs['id']); ?>" class="btn btn-primary"><?= $mhs['final_test']; ?></a>
                                 </td>
                                 <td data-idmahasiswa="<?= $mhs['id']; ?>" data-jk="<?= $mhs['jk']; ?>" data-angkatan="<?= $mhs['angkatan']; ?>">
-                                    <a href="" class="badge badge-success edit-mahasiswa" data-toggle="modal" data-target="#ModalEdit">Edit</a>
+                                    <a href="" class="btn btn-success btn-sm edit-mahasiswa" data-toggle="modal" data-target="#ModalEdit" title="Edit"><i class="fas fa-fw fa-edit"></i></a>
 
-                                    <a href="" class=" badge badge-danger delete-mahasiswa" data-toggle="modal" data-target="#hapusModal">Delete</a>
+                                    <a href="" class=" btn btn-danger btn-sm delete-mahasiswa" data-toggle="modal" data-target="#hapusModal" title="Delete"><i class="fas fa-fw fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php $i++;
@@ -106,7 +108,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" id="modal-form-tambah" action="<?= base_url('ujian/tambahMahasiswa/' . $kelas['id']); ?>">
+            <form method="post" id="modal-form-tambah" action="<?= base_url('ujian/mahasiswa/' . $kelas['id'] . '?tahun=' . $pilihan_angkatan); ?>">
                 <div class="modal-body">
                     <input type="hidden" name="jk" value="<?= $user['jk']; ?>">
                     <div class="form-group">
@@ -150,6 +152,7 @@
             </div>
             <form method="post" id="modal-form-edit">
                 <div class="modal-body">
+                    <input type="hidden" name="nimbefore">
                     <div class="form-group">
                         NIM
                         <input type="text" class="formInput form-control form-control-user" placeholder="NIM" name="nim">
@@ -233,18 +236,20 @@
 
 
             const mfe = document.getElementById('modal-form-edit');
+            const mfeNimBefore = mfe.querySelector('input[name="nimbefore"]');
             const mfeNim = mfe.querySelector('input[name="nim"]');
             const mfeNama = mfe.querySelector('input[name="nama"]');
             const mfeTelp = mfe.querySelector('input[name="telp"]');
             const mfeAngkatan = mfe.querySelector('input[name="angkatan"]');
 
+            mfeNimBefore.setAttribute('value', nim);
             mfeNim.setAttribute('value', nim);
             mfeNama.setAttribute('value', nama);
             mfeTelp.setAttribute('value', telp);
             mfeAngkatan.setAttribute('value', angkatan);
 
 
-            mfe.setAttribute('action', `<?= base_url('ujian/editMahasiswa/' . $kelas['id'] ) ?>/${id_mahasiswa}/?tahun=${pilihanAngkatan}`);
+            mfe.setAttribute('action', `<?= base_url('ujian/editMahasiswa/' . $kelas['id']) ?>/${id_mahasiswa}/?tahun=${pilihanAngkatan}`);
         })
     });
 

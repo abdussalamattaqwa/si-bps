@@ -11,7 +11,7 @@
             <?= $this->session->flashdata('message'); ?>
 
             <h5>Role : <?= $role['role']; ?></h5>
-            <table class="table table-hover">
+            <table class="table table-hover text-gray-900">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

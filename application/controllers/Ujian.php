@@ -171,50 +171,69 @@ class Ujian extends CI_Controller
 
 
 
-    public function mahasiswa($idkelas)
+    public function mahasiswa()
     {
-        $pilih_angkatan = (isset($_GET['tahun'])) ? $_GET['tahun'] : date('Y');
+        $this->form_validation->set_rules('nim', 'NIM', 'required|trim|integer|max_length[12]', [
+            'integer' => 'NIM harus diisi dengan angka'
+        ]);
+        // $this->form_validation->set_rules('nim', 'NIM', 'required|trim|integer|is_unique[mahasiswa.nim]|max_length[12]', [
+        //     'integer' => 'NIM harus diisi dengan angka',
+        //     'is_unique' => 'NIM telah terdaftar kedalam sistem'
+        // ]);
+        $this->form_validation->set_rules('telp', 'Telp', 'trim|integer|max_length[15]', [
+            'integer' => 'No. Telpon harus diisi dengan angka'
+        ]);
+        if (isset($_POST['nama'])) {
+            if (!ctype_alpha(str_replace(' ', '', $this->input->post('nama')))) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Nama harus menggunakan huruf alphabet saja</div>');
+            }
+        }
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+        $idkelas = $this->uri->segment(3);
+        if (!isset($idkelas)) {
+            redirect('ujian');
+        }
+        if ($this->form_validation->run() == false) {
 
-        $data['angkatan'] = $pilih_angkatan;
-        $data['title'] = 'Ujian SAINS';
+            $pilih_angkatan = (isset($_GET['tahun'])) ? $_GET['tahun'] : date('Y');
 
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-        $data['kelas'] = $this->db->get_where('daftar_kelas', ['id' => $idkelas])->row_array();
+            $data['angkatan'] = $pilih_angkatan;
+            $data['title'] = 'Ujian SAINS';
 
-
-        $query = "SELECT `mahasiswa`.*, `daftar_kelas`.`kelas`, `nilai_sains`.`pre_test`, `nilai_sains`.`final_test` FROM mahasiswa 
-        JOIN `daftar_kelas` ON `mahasiswa`.`id_kelas` = `daftar_kelas`.`id` 
-        LEFT JOIN `nilai_sains` ON `mahasiswa`.`id` = `nilai_sains`.`id_mahasiswa`  WHERE `mahasiswa`.`id_kelas` = $idkelas AND 
-        `mahasiswa`.`angkatan` = $pilih_angkatan AND
-        `mahasiswa`.`jk` = '" . $data['user']['jk'] . "' ORDER BY `mahasiswa`.`id`";
+            $data['user'] = $this->db->get_where('user', ['email' =>
+            $this->session->userdata('email')])->row_array();
+            $data['kelas'] = $this->db->get_where('daftar_kelas', ['id' => $idkelas])->row_array();
 
 
-        $data['mahasiswa'] = $this->db->query($query)->result_array();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('ujian/daftar_mahasiswa', $data);
-        $this->load->view('templates/footer_tables');
+            $query = "SELECT `mahasiswa`.*, `daftar_kelas`.`kelas`, `nilai_sains`.`pre_test`, `nilai_sains`.`final_test` FROM mahasiswa JOIN `daftar_kelas` ON `mahasiswa`.`id_kelas` = `daftar_kelas`.`id` LEFT JOIN `nilai_sains` ON `mahasiswa`.`id` = `nilai_sains`.`id_mahasiswa`  WHERE `mahasiswa`.`id_kelas` = $idkelas AND  `mahasiswa`.`angkatan` = $pilih_angkatan AND `mahasiswa`.`jk` = '" . $data['user']['jk'] . "' ORDER BY `mahasiswa`.`id`";
+
+            $data['pilihan_angkatan'] = $pilih_angkatan;
+
+            $data['mahasiswa'] = $this->db->query($query)->result_array();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('ujian/daftar_mahasiswa', $data);
+            $this->load->view('templates/footer_tables');
+        } else {
+
+
+            $data = [
+                'nim' => $this->input->post('nim'),
+                'nama' => $this->input->post('nama'),
+                'telp' => $this->input->post('telp'),
+                'jk' => $this->input->post('jk'),
+                'angkatan' => $this->input->post('angkatan'),
+                'id_kelas' => $idkelas
+            ];
+
+            $this->db->insert('mahasiswa', $data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa berhasil ditambahkan</div>');
+            redirect('ujian/mahasiswa/' . $idkelas . '?tahun=' . $this->input->post('angkatan'));
+        }
     }
 
-
-    public function tambahMahasiswa($idKelas)
-    {
-        $data = [
-            'nim' => $this->input->post('nim'),
-            'nama' => $this->input->post('nama'),
-            'telp' => $this->input->post('telp'),
-            'jk' => $this->input->post('jk'),
-            'angkatan' => $this->input->post('angkatan'),
-            'id_kelas' => $idKelas
-        ];
-
-        $this->db->insert('mahasiswa', $data);
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa berhasil ditambahkan</div>');
-        redirect('ujian/mahasiswa/' . $idKelas . '?tahun=' . $this->input->post('angkatan'));
-    }
 
     public function test($test, $proses, $idkelas, $id_mahasiswa)
     {
@@ -267,6 +286,49 @@ class Ujian extends CI_Controller
 
     public function editMahasiswa($idKelas, $idMahasiswa)
     {
+        $error = false;
+        // $errornimunique = '';
+        $errornim = '';
+        $errorname = '';
+        $errortelp = '';
+
+        // $nimbefore = $this->input->post('nimbefore');
+        // $nim = $this->input->post('nim');
+
+        // if ($nim != $nimbefore) {
+        //     $ceknim = $this->db->get_where('mahasiswa', [
+        //         'nim' => $nim
+        //     ])->num_rows();
+        //     if ($ceknim != 0) {
+        //         $error = true;
+        //         $errornimunique = '<div class="alert alert-danger" role="alert">NIM telah terdaftar</div>';
+        //     }
+        // }
+
+        if (!ctype_digit($this->input->post('nim'))) {
+            $error = true;
+            $errornim = '<div class="alert alert-danger" role="alert">NIM harus diisi dengan angka</div>';
+        }
+
+        if (!ctype_digit($this->input->post('telp'))) {
+            $error = true;
+            $errortelp = '<div class="alert alert-danger" role="alert">Telp harus diisi dengan angka</div>';
+        }
+
+        if (!ctype_alpha(str_replace(' ', '',  $this->input->post('nama')))) {
+            $error = true;
+            $errorname = '<div class="alert alert-danger" role="alert">Nama harus menggunakan huruf saja</div>';
+        }
+
+        if ($error) {
+            $this->session->set_flashdata('message', $errornim .
+                // $errornimunique .
+                $errorname .
+                $errortelp);
+            redirect('ujian/mahasiswa/' . $idKelas . '?tahun=' . $_GET['tahun']);
+        }
+
+
         $data = [
             'nim' => $this->input->post('nim'),
             'nama' => $this->input->post('nama'),
@@ -279,7 +341,7 @@ class Ujian extends CI_Controller
         $this->db->update('mahasiswa');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Mahasiswa berhasil diubah</div>');
-        redirect('ujian/mahasiswa/' . $idKelas);
+        redirect('ujian/mahasiswa/' . $idKelas . '?tahun=' . $_GET['tahun']);
     }
 
     public function hapusMahasiswa($idKelas, $idMahasiswa, $tahun)

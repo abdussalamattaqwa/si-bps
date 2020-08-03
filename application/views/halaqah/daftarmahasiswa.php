@@ -175,9 +175,9 @@
 
                                         </tr>
                                 <?php
-
+                                        $i++;
                                     endif;
-                                    $i++;
+
 
                                 endforeach; ?>
 

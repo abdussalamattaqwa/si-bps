@@ -50,13 +50,18 @@
                                 <td><?= $dtTutor['fakultas']; ?></td>
                                 <td data-id="<?= $dtTutor['id']; ?>" data-idUser="<?= $dtTutor['id_user']; ?>">
                                     <!-- Tombol Edit -->
-                                    <a href="" class="badge badge-primary detail-tutor" data-toggle="modal" data-target="#ModalDetail">Detail</a>
-
-                                    <?php if ($status != 'dosen') : ?>
-                                        <a href="<?= base_url('Tutor/edit_tutor/' . $dtTutor['iduser']); ?>" class="badge badge-success">Edit</a>
-
+                                    <a href="" class="btn btn-primary btn-sm detail-tutor" data-toggle="modal" data-target="#ModalDetail"><i class="fas fa-fw fa-info-circle"></i> Detail</a>
+                                    <?php if (
+                                        $status != 'dosen' &&
+                                        $user['role_id'] <= $dtTutor['role_id'] &&
+                                        (!is_korfak($user['role_id'])
+                                            ||
+                                            (is_korfak($user['role_id']) &&
+                                                $fakultas_user['fakultas'] == $dtTutor['fakultas']))
+                                    ) : ?>
+                                        <a href="<?= base_url('Tutor/edit_tutor/' . $dtTutor['iduser']); ?>" class="btn btn-success btn-sm"><i class="fas fa-fw fa-edit"></i> Edit</a>
                                         <?php if ($dtTutor['iduser'] != $user['id']) : ?>
-                                            <a href="" class=" badge badge-danger delete-tutor" data-toggle="modal" data-target="#hapusModal">Delete
+                                            <a href="" class=" btn btn-danger btn-sm delete-tutor" data-toggle="modal" data-target="#hapusModal"><i class="fas fa-fw fa-trash"></i> Delete
                                             </a>
                                         <?php endif; ?>
                                     <?php endif; ?>

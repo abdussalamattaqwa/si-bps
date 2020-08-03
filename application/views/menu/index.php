@@ -12,7 +12,7 @@
 
         <div class="alert alert-warning" role="alert">Apabila menu diubah, maka code programnya juga <b>harus</b> diubah</div>
         <br>
-        <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+        <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Tambah Menu</a>
         <table class="table table-hover text-gray-900">
             <thead>
                 <tr>
@@ -29,9 +29,9 @@
                         <th scope="row"><?= $i; ?></th>
                         <td><?= $m['menu']; ?></td>
                         <td data-menu="<?= $m['menu']; ?>" data-id="<?= $m['id']; ?>">
-                            <a href="" class="badge badge-success aEditMenu" data-toggle="modal" data-target="#editMenuModal">edit</a>
+                            <a href="" class="btn btn-success btn-sm aEditMenu" data-toggle="modal" data-target="#editMenuModal" title="Edit"><i class="fas fa-fw fa-edit"></i> Edit</a>
                             <?php if ($m['id'] != 1) : ?>
-                                <a href="" class="badge badge-danger delete-menu-badge" data-toggle="modal" data-target="#hapusModal">delete</a>
+                                <a href="" class="btn btn-danger btn-sm delete-menu-badge" data-toggle="modal" data-target="#hapusModal" title="Delete"><i class="fas fa-fw fa-trash"></i> Delete</a>
                             <?php endif; ?>
                         </td>
                     </tr>

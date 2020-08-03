@@ -207,6 +207,7 @@ class Nilai extends CI_Controller
         $nama = 'Nilai Kelas ' . $data['kelas']['kelas'] . ' Semester ' . $data['kelas']['semester'] . '_' . $tahun;
         $this->load->library('Mypdf');
         $this->mypdf->generate('nilai/pdf_nilai', $data, $nama);
+        // $this->load->view('nilai/pdf_nilai', $data);
     }
 
     public function excel_nilai($tahun, $idkelas)
@@ -217,5 +218,12 @@ class Nilai extends CI_Controller
 
         $this->load->library('Myexcel');
         $this->myexcel->nilai($nama, $data);
+    }
+
+    public function coba($tahun, $idkelas)
+    {
+        $this->load->model('Nilai_model');
+        $data = $this->Nilai_model->get_data_nilai($tahun, $idkelas);
+        $this->load->view('nilai/print_nilai_copy', $data);
     }
 }

@@ -52,17 +52,19 @@
                     </div>
                 </div>
             </div>
-            <?php if ($status != 'user') { ?>
+            <?php if ($status != 'admin') { ?>
                 <div class="form-group row">
                     <?php if ($status == 'dosen') { ?>
                         <label for="nip" class="col-sm-2 col-form-label">NIP</label>
                         <div class="col-sm-10">
                             <input type="text" name="nip" id="nip" class="form-control" placeholder="NIP" value="<?= $user['nip']; ?>">
+                            <?= form_error('nip', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                     <?php } else { ?>
                         <label for="nim" class="col-sm-2 col-form-label">NIM</label>
                         <div class="col-sm-10">
                             <input type="text" name="nim" id="nim" class="form-control" placeholder="NIM" value="<?= $user['nim']; ?>">
+                            <?= form_error('nim', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                     <?php } ?>
                 </div>
@@ -71,6 +73,7 @@
                     <label for="telp" class="col-sm-2 col-form-label">No. Telephone</label>
                     <div class="col-sm-10">
                         <input type="text" name="telp" id="telp" class="form-control" placeholder="No. Telephone" value="<?= $user['telp']; ?>">
+                        <?= form_error('telp', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
 

@@ -4,13 +4,15 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4"><?= $title; ?></h1>
 
+    <?= $this->session->flashdata('message'); ?>
+
     <div class="row">
         <div class="col-lg-8">
             <form method="post" action="">
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input size="100" type="text" class="form-control form-control-user" id="name" placeholder="Full Name" name="name" value="<?= set_value('name'); ?>">
+                        <input size="100" type="text" class="form-control form-control-user" placeholder="Full Name" name="name" value="<?= set_value('name'); ?>">
                         <?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
@@ -110,6 +112,7 @@
                     <label for="telp" class="col-sm-2 col-form-label">No. Telephone</label>
                     <div class="col-sm-10">
                         <input type="text" name="telp" id="telp" class="form-control" placeholder="No. Telephone" value="">
+                        <?= form_error('telp', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
 

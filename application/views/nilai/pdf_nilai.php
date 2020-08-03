@@ -2,180 +2,153 @@
 <html lang="en">
 
 <head>
-    <title>Nilai Kelas <?= $kelas['kelas'] . ' Semester ' . $kelas['semester'] . '/' . $tahun; ?>; </title>
 
 
-    <!-- Custom styles for this template-->
-    <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
 
-    <style>
-        @page {
-            size: A4;
-            font-size: 11pt;
-            position: relative;
+    <title>Nilai Kelas <?= $kelas['kelas'] . ' Semester ' . $kelas['semester'] . '/' . $tahun; ?></title>
+
+    <style type="text/css">
+        /* <!-- */
+        .style4 {
+            font-size: 9px
         }
 
-        body {
-            margin: 0;
-            padding: 0;
+        .style6 {
+            font-size: 11px
         }
 
-        .header {
-            /* width: 21cm; */
-            /* margin: 3cm; */
-            /* margin-bottom: 0; */
-            text-align: center;
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 10px;
-            font-size: 14pt;
-            margin-top: 5px;
-            position: relative;
+        .style7 {
+            font-size: 16px
         }
 
-        .header p:nth-child(1) {
-            font-size: 16pt;
+        .style8 {
+            font-size: 12pt;
+            color: #000000;
         }
 
-        .header .h12 {
-            font-size: 11pt;
+        .style9 {
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        .header img {
-            top: -12px;
-            width: 3cm;
-            position: absolute;
+        .style10 {
+            font-size: 14px
         }
 
-        .header img.logo-unm {
-            left: 0;
-        }
-
-        .header img.logo-bps {
-            right: 0;
-        }
-
-        /* .isi {
-            width: 21cm; 
-             margin: 0 3cm;
-        } */
-
-        table {
-            width: 100%;
-            /* border: 2px solid black; */
-        }
-
-        .table thead th,
-        .table tbody td {
+        .border th,
+        .border td {
             border: solid 1px black;
+            padding: 5pt 3pt;
         }
 
-        .isi {
-            font-family: 'Times New Roman', Times, serif;
-        }
+        /* --> */
     </style>
 </head>
 
 <body>
+    <div id="isi">
+        <table align="center" style="border-spacing: -1px;">
+            <tr>
+                <td colspan="2" scope="row" align="center"><img src="assets/img/logo-unm.png" width="77" height="77"></td>
+                <td colspan="14" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">
+                    <div align="center" class="style7">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN <br />
+                        UNIVERSITAS NEGERI MAKASSAR<br />
+                        UNIT PELAKSANA TEKNIS MATA KULIAH UMUM<br />
+                        BADAN PELAKSANA SAINS<br />
+                        <div align="center"><span class="style6">Sekretariat : Masjid Ulil Albab Parang Tambung UNM, Makassar. KP. 90220 Telp. 085255549154</span></div>
+                    </div>
+                </td>
+                <td colspan="2" scope="row"><img src="assets/img/logo-bps.png" width="77" height="77"></td>
+            </tr>
+            <tr>
+                <td colspan="18" scope="row">
+                    <hr color="black" alt="" height="1" />
+                </td>
+            </tr>
+            <tr height="10">
+                <td></td>
+            </tr>
 
-    <div class="text-gray-900">
-        <div class="header">
-            <img src="assets/img/logo-unm.png" alt="" class="logo-unm">
-            <img src="assets/img/logo-bps.png" alt="" class="logo-bps">
-            <p>KEMENTRIAN PENDIDIKAN DAN KEBUDAYAAN</p>
-            <p>UNIVERSITAS NEGERI MAKASSAR (UNM)</p>
-            <p>UNIT PELAKSANA TEKNIS MATA KULIAH UMUM</p>
-            <p>BADAN PELAKSANA SAINS</p>
-            <p class="h12">Sekretariat : Masjid Ulil Albab Parang Tambung UNM, Makassar. KP. 90220 Telp. 085255549154</p>
-            <hr style="margin-bottom: -15px;">
-        </div>
+            <tr>
+                <td colspan="18" align="center">
+                    <div style=" font-family:Times New Roman; font-size:14pt; color:#000000;">Daftar Nilai SAINS</div>
+                </td>
+            </tr>
+
+            <tr height="18">
+                <td></td>
+            </tr>
+
+            <tr>
+                <td scope="row" colspan="3">Semester/Tahun</td>
+                <td colspan="14" align="left">: <?= $kelas['semester'] . '/' . $tahun; ?></td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="3">Fakultas</td>
+                <td colspan="14" align="left">: <?= $kelas['fakultas']; ?></td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="3">Prodi</td>
+                <td colspan="14" align="left">: <?= $kelas['prodi']; ?></td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="3">Kelas</td>
+                <td colspan="14" align="left">: <?= $kelas['kelas']; ?></td>
+            </tr>
+            <tr height="13">
+                <td><br></br></td>
+            </tr>
+
+            <tr class="border" style="margin-top: 2px;">
+                <th rowspan="2" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">No</th>
+                <th rowspan="2" colspan="2" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">Nim</th>
+                <th rowspan="2" colspan="7" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">Nama</th>
+                <th rowspan="2" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">JK</th>
+                <th rowspan="2" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">Kehadiran <br> (45%) </th>
+                <th rowspan="2" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">Mid <br> (15%) </th>
+                <th rowspan="2" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">Final <br> (30%) </th>
+                <th rowspan="2" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">Tugas <br> (10%)</th>
+                <th colspan="2" align="center" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">Akhir</th>
+            </tr>
+            <tr class="border">
+                <th style=" font-family:Times New Roman; font-size:12pt; color:#000000;">Angka</th>
+                <th style=" font-family:Times New Roman; font-size:12pt; color:#000000; border: solid 1px black">Huruf</th>
+            </tr>
 
 
+            <?php
+            $i = 1;
+            foreach ($mahasiswa as $mhs) : ?>
 
+                <tr class="border">
+                    <td align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000; padding: 7pt;"><?= $i; ?></td>
 
-        <div class="isi mt-3">
+                    <td colspan="2" align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000;"><?= $mhs['nim']; ?></td>
 
+                    <td colspan="7" style="font-family:Times New Roman; font-size:12pt; color:#000000; padding-left: 3pt;"><?= $mhs['nama']; ?></td>
 
-            <h3 class="text-center">Daftar Nilai SAINS </h3>
+                    <td align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000;"><?= $mhs['jk']; ?></td>
 
-            <table>
-                <tr>
-                    <td>Semester/Tahun</td>
-                    <td>: <?= $kelas['semester'] . '/' . $tahun; ?></td>
+                    <td align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000;"><?= ($mhs['kehadiran'] != null) ? $mhs['kehadiran'] : '0'; ?></td>
+
+                    <td align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000;"><?= ($mhs['mid'] != null) ? $mhs['kehadiran'] : '0'; ?></td>
+
+                    <td align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000;"><?= ($mhs['final_test'] != null) ? $mhs['kehadiran'] : '0'; ?></td>
+
+                    <td align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000;"><?= ($mhs['tugas'] != null) ? $mhs['kehadiran'] : '0'; ?></td>
+
+                    <td align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000;"><?= $mhs['akhir']; ?></td>
+
+                    <td align="center" style="font-family:Times New Roman; font-size:12pt; color:#000000;"><?= $mhs['huruf']; ?></td>
                 </tr>
-                <tr>
-                    <td>Fakultas</td>
-                    <td>: <?= $kelas['fakultas']; ?></td>
-                </tr>
-                <tr>
-                    <td>Jurusan</td>
-                    <td>: <?= $kelas['jurusan']; ?></td>
-                </tr>
-
-                <tr>
-                    <td>Prodi</td>
-                    <td>: <?= $kelas['prodi']; ?></td>
-                </tr>
-                <tr>
-                    <td>Kelas</td>
-                    <td>: <?= $kelas['kelas']; ?></td>
-                </tr>
-            </table>
-
-            <br>
-
-            <div class="row">
-                <div class="col-lg-11">
-                    <table class="table table-bordered text-center">
-                        <thead>
-                            <tr>
-                                <th rowspan="2" class="text-center" style="top: -30px;">No</th>
-                                <th rowspan="2" class="text-center">Nim</th>
-                                <th rowspan="2" class="text-center">Nama</th>
-                                <th rowspan="2" class="text-center">JK</th>
-                                <th rowspan="2" class="text-center">Kehadiran <br> (45%) </th>
-                                <th rowspan=" 2" class="text-center">Mid <br> (15%) </th>
-                                <th rowspan="2" class="text-center">Final <br> (30%) </th>
-                                <th rowspan="2" class="text-center">Tugas <br> (10%)</th>
-                                <th colspan="2" class="text-center">Akhir</th>
-
-                            </tr>
-                            <tr>
-                                <th>Angka</th>
-                                <th>Huruf</th>
-
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($mahasiswa as $mhs) : ?>
-
-                                <tr>
-                                    <td><?= $i; ?></td>
-                                    <td><?= $mhs['nim']; ?></td>
-                                    <td width="30px"><?= $mhs['nama']; ?></td>
-                                    <td><?= $mhs['jk']; ?></td>
-                                    <td><?= ($mhs['kehadiran'] != null) ? $mhs['kehadiran'] : '0'; ?></td>
-                                    <td><?= ($mhs['mid'] != null) ? $mhs['kehadiran'] : '0'; ?></td>
-                                    <td><?= ($mhs['final_test'] != null) ? $mhs['kehadiran'] : '0'; ?></td>
-                                    <td><?= ($mhs['tugas'] != null) ? $mhs['kehadiran'] : '0'; ?></td>
-
-                                    <td><?= $mhs['akhir']; ?></td>
-                                    <td><?= $mhs['huruf']; ?></td>
+            <?php
+                $i++;
+            endforeach; ?>
 
 
-                                </tr>
-                            <?php
-                                $i++;
-                            endforeach; ?>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
+        </table>
+    </div>
 </body>
 
 </html>

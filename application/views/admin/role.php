@@ -18,7 +18,7 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-gray-900">
                 <?php $i = 1; ?>
                 <?php foreach ($role as $r) : ?>
 

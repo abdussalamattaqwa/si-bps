@@ -7,10 +7,6 @@
     <a href="<?= base_url('admin/registration') ?>" class="btn btn-primary mb-3">Tambah User</a>
     <?= $this->session->flashdata('message'); ?>
 
-    <?php
-    // var_dump($dataUser);
-    // die;
-    ?>
     <div class="card shadow mb-2">
         <div class="card-body">
             <div class="table-responsive">
@@ -50,9 +46,13 @@
                                 <td>
                                     <!-- Tombol Edit -->
                                     <?php if ($u['iduser'] != 1) : ?>
-                                        <a href="" class="badge badge-success editUser" data-toggle="modal" data-target="#editModal" data-nama="<?= $u["name"]; ?>" data-email="<?= $u["email"]; ?>" data-role="<?= $u["role_id"]; ?>" data-iduser="<?= $u["iduser"]; ?>" data-username="<?= $u['username']; ?>" data-jk="<?= $u["jk"]; ?>">Edit</a>
+                                        <button href="" class="btn btn-success btn-sm editUser" data-toggle="modal" data-target="#editModal" title="Edit" data-nama="<?= $u["name"]; ?>" data-email="<?= $u["email"]; ?>" data-role="<?= $u["role_id"]; ?>" data-iduser="<?= $u["iduser"]; ?>" data-username="<?= $u['username']; ?>" data-jk="<?= $u["jk"]; ?>">
+                                            <i class="fas fa-fw fa-edit"></i>
+                                        </button>
 
-                                        <a href="" class="badge badge-danger deleteUser" data-toggle="modal" data-target="#deleteModal" data-iduser="<?= $u["iduser"]; ?>" data-nama="<?= $u["name"]; ?>" data-image="<?= $u['image']; ?>" data-roleid="<?= $u['role_id']; ?>">Delete</a>
+                                        <button href="" class="btn btn-danger btn-sm deleteUser" data-toggle="modal" title="Delete" data-target="#deleteModal" data-iduser="<?= $u["iduser"]; ?>" data-nama="<?= $u["name"]; ?>" data-image="<?= $u['image']; ?>" data-roleid="<?= $u['role_id']; ?>">
+                                            <i class="fas fa-fw fa-trash"></i>
+                                        </button>
 
                                     <?php endif; ?>
                                 </td>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="form-group">
                         <select name="role_id" id="role_id" class="form-control">
-                            <option value="">Status
+                            <option value="2">Status
                                 <?php foreach ($role as $r) : ?>
                             <option value="<?= $r['id'] ?>"><?= $r['role'] ?></option>
                         <?php endforeach; ?>

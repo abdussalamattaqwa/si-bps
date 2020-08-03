@@ -51,7 +51,7 @@
                                 <td><?= $dtTutor['fakultas']; ?></td>
                                 <td>
                                     <!-- Tombol Edit -->
-                                    <a href="<?= base_url('halaqah/settutor/' . $tahun . '/' . $kelas['id'] . '/' . $halaqah['id'] . '/' . $dtTutor['id']); ?>?jk=<?= $jk; ?>" class=" badge badge-primary">Pilih</a>
+                                    <a href="<?= base_url('halaqah/settutor/' . $tahun . '/' . $kelas['id'] . '/' . $halaqah['id'] . '/' . $dtTutor['id']); ?>?jk=<?= $jk; ?>" class=" btn btn-primary btn-sm"><i class="fas fa-fw fa-mouse-pointer"></i> Pilih</a>
 
                                     </a>
                                 </td>

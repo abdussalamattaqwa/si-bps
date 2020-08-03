@@ -6,7 +6,6 @@
 
     <?php foreach ($jurusan as $dj) : ?>
         <?php if ($dj['tingkat'] == 2) : ?>
-            <br>
             <div class="ml-3 border-left-info" style="padding-left: 12px;">
                 <h4><?= $dj['jurusan']; ?></h4>
             </div>
@@ -24,7 +23,7 @@
                     </ul>
                 <?php endif; ?>
             <?php endforeach; ?>
-
+            <br>
         <?php endif; ?>
 
     <?php endforeach; ?>

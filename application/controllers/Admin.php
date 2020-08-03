@@ -42,28 +42,41 @@ class Admin extends CI_Controller
 
     public function tambahRole()
     {
-        $data = [
-            'role' => htmlspecialchars($this->input->post('role'))
-        ];
+        if ($this->input->post('role') != null) {
+            if (!ctype_alpha(str_replace(' ', '', $this->input->post('role')))) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Role harus menggunakan huruf semua, tidak boleh mengandung angka, simbol,dll</div>');
+                redirect('admin/role');
+            }
 
-        $this->Admin_model->insert_role($data);
+            $data = [
+                'role' => htmlspecialchars($this->input->post('role'))
+            ];
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Role berhasil ditambahkan</div>');
+            $this->Admin_model->insert_role($data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Role berhasil ditambahkan</div>');
+        }
         redirect('admin/role');
     }
 
     public function editRole()
     {
-        $role_id = $this->input->post('roleId');
-        $nama = htmlspecialchars($this->input->post('role'));
+        if ($this->input->post('role') != null) {
+            if (!ctype_alpha(str_replace(' ', '', $this->input->post('role')))) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Role harus menggunakan huruf semua, tidak boleh mengandung angka, simbol,dll</div>');
+                redirect('admin/role');
+            }
+            $role_id = $this->input->post('roleId');
+            $nama = htmlspecialchars($this->input->post('role'));
 
-        $data = [
-            'role' => $nama
-        ];
+            $data = [
+                'role' => $nama
+            ];
 
-        $this->Admin_model->update_role($data, $role_id);
+            $this->Admin_model->update_role($data, $role_id);
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Nama Role Telah diubah</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Nama Role Telah diubah</div>');
+        }
         redirect('admin/role');
     }
 
@@ -132,11 +145,11 @@ class Admin extends CI_Controller
             'is_unique' => 'this email has already registered!'
         ]);
         $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]');
-        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-            'matches' => 'Password dont match',
-            'min_length' => 'Password to short'
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]', [
+            'matches' => 'Password tidak sesuai',
+            'min_length' => 'Password minimal 6 karakter'
         ]);
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[3]|matches[password1]');
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[6]|matches[password1]');
 
 
         if ($this->form_validation->run() == false) {
@@ -151,6 +164,25 @@ class Admin extends CI_Controller
             $this->load->view('admin/registration', $data);
             $this->load->view('templates/footer');
         } else {
+            $errname = '';
+            $errusername = '';
+            $error = false;
+            if (!ctype_alpha(str_replace([' ', '.', ','], '', $this->input->post('name'))) && $this->input->post('name') != null) {
+                $error = true;
+                $errname = '<div class="alert alert-danger" role="alert">nama harus mengandung huruf alfabet saja.</div>';
+            }
+
+            if (!ctype_alpha($this->input->post('username')) && $this->input->post('username') != null) {
+                $error = true;
+                $errusername = '<div class="alert alert-danger" role="alert">username harus mengandung huruf alfabet saja, dan tidak boleh ada spasi</div>';
+            }
+
+            if ($error) {
+                $this->session->set_flashdata('message', $errname . $errusername);
+                redirect('admin/registration');
+            }
+
+
             $active = $this->input->post('is_active');
             $role_id = htmlspecialchars($this->input->post('role_id', true));
 
@@ -173,7 +205,7 @@ class Admin extends CI_Controller
             $this->Admin_model->insert_user($data, $role_id);
 
 
-            
+
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat USER berhasil ditambahkan.</div>');
             redirect('admin/daftaruser');
         }
@@ -188,6 +220,12 @@ class Admin extends CI_Controller
         $user = $this->db->get_where('user', ['id' => $idUser])->row_array();
         $email = htmlspecialchars($this->input->post('email', true));
         $username = htmlspecialchars($this->input->post('username'));
+        $name = htmlspecialchars($this->input->post('name'));
+
+        if (!ctype_alpha(str_replace([' ', '.', ','], '', $name))) {
+            $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Nama harus diisi dengan huruf</div>');
+            redirect('admin/daftaruser');
+        }
 
         if ($email == null) {
             $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Email tidak boleh kosong</div>');

@@ -47,12 +47,8 @@
                 <?php }
                 endforeach; ?>
             </select>
-            <!-- <input type="text" name="angkatan" class=" form-control" value="2016" readonly> -->
         </div>
     </div>
-    <!-- <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#Modal">Tambah Kelas</a> -->
-
-
 
     <div class="row">
         <div class="col-lg-8 table-responsive">
@@ -73,7 +69,7 @@
                             <td><?= $dk['kelas']; ?></td>
                             <td><?= $dk['anggota']; ?></td>
                             <td>
-                                <a href="<?= base_url('ujian/mahasiswa/' . $dk['id'] . '?tahun=' . $angkatan); ?>" class="badge badge-primary pilih_kelas">Pilih</a>
+                                <a href="<?= base_url('ujian/mahasiswa/' . $dk['id'] . '?tahun=' . $angkatan); ?>" class="btn btn-primary btn-sm pilih_kelas"><i class="fas fa-fw fa-mouse-pointer"></i> Pilih</a>
                             </td>
 
                         </tr>

@@ -1,8 +1,14 @@
+<?php
+
+use phpDocumentor\Reflection\Types\This;
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid text-gray-800">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4"><?= $title; ?></h1>
+
+    <?= $this->session->flashdata('message'); ?>
 
     <div class="row">
         <div class="col-sm-8">
