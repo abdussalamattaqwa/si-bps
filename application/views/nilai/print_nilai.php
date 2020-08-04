@@ -70,7 +70,7 @@
                 <td width="210mm" height="296mm">
                     <table width="584" border="0" align="center">
                         <tr>
-                            <td rowspan="2" scope="row" style="padding-left: 10pt;"><img src="<?= base_url('assets/'); ?>img/logo-unm.png" width="77" height="77"></td>
+                            <td rowspan="2" scope="row" style="padding-left: 10pt;"><img src="<?= base_url('assets/'); ?>img/logo-unm.png" width="90" height="90"></td>
                             <td colspan="4" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">
                                 <div align="center" class="style7">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN <br />
                                     UNIVERSITAS NEGERI MAKASSAR<br />
@@ -78,7 +78,7 @@
                                     BADAN PELAKSANA SAINS
                                 </div>
                             </td>
-                            <td rowspan="2" scope="row"><img src="<?= base_url('assets/'); ?>img/logo-bps.png" width="77" height="77"></td>
+                            <td rowspan="2" scope="row"><img src="<?= base_url('assets/'); ?>img/logo-bps.png" width="90" height="90"></td>
                         </tr>
                         <tr>
                             <td colspan="4" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">

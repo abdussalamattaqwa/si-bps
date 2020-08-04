@@ -78,7 +78,7 @@
     <div id="isi" width="210mm">
         <table border="0" align="center" style="border-spacing: -1px; border-collapse: collapse;">
             <tr>
-                <td colspan="2" scope="row" align="center"><img src="<?= base_url('assets/'); ?>img/logo-unm.png" width="77" height="77"></td>
+                <td colspan="2" scope="row" align="center"><img src="<?= base_url('assets/'); ?>img/logo-unm.png" width="90" height="90"></td>
                 <td colspan="14" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">
                     <div align="center" class="style7">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN <br />
                         UNIVERSITAS NEGERI MAKASSAR<br />
@@ -87,7 +87,7 @@
                         <div align="center"><span class="style6">Sekretariat : Masjid Ulil Albab Parang Tambung UNM, Makassar. KP. 90220 Telp. 085255549154</span></div>
                     </div>
                 </td>
-                <td colspan="2" scope="row"><img src="<?= base_url('assets/'); ?>img/logo-bps.png" width="77" height="77"></td>
+                <td colspan="2" scope="row"><img src="<?= base_url('assets/'); ?>img/logo-bps.png" width="90" height="90"></td>
             </tr>
             <tr>
                 <td colspan="18" scope="row">

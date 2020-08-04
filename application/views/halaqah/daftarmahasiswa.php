@@ -22,7 +22,7 @@
 
     <a href class="btn btn-primary mb-3 text-gray-100" data-toggle="modal" data-target="#ModalTambah">Tambah Halaqah</a>
 
-    <a href='<?= base_url('halaqah/edit_anggota_halaqah/' . $tahun . '/' . $kelas['id']); ?>?jk=<?= $jk; ?>' class="btn btn-info mb-3 text-gray-100" target="_blank"><i class="fa fa-edit"></i> Edit Anggota Halaqah</a>
+    <a href='<?= base_url('halaqah/edit_anggota_halaqah/' . $tahun . '/' . $kelas['id']); ?>?jk=<?= $jk; ?>' class="btn btn-info mb-3 text-gray-100"><i class="fa fa-edit"></i> Edit Anggota Halaqah</a>
 
     <a href='<?= base_url('halaqah/printHalaqah/' . $tahun . '/' . $kelas['id']); ?>?jk=<?= $jk; ?>' class="btn btn-danger mb-3 text-gray-100" target="_blank"><i class="fa fa-print"></i> Print</a>
     <!-- <a href='<?= base_url('halaqah/pdfHalaqah/' . $tahun . '/' . $kelas['id']); ?>?jk=<?= $jk; ?>' class="btn btn-warning mb-3 text-gray-100" target="_blank"><i class="fa fa-file"></i> Export PDF</a>
