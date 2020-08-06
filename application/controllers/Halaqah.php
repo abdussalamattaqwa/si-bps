@@ -138,7 +138,7 @@ class Halaqah extends CI_Controller
 
         $data['jk'] = $_GET['jk'];
 
-        $data['fakultas'] = $fakultas;
+        $data['fakultas'] = urldecode($fakultas);
         $data['tahun'] = $_GET['tahun'];
         $data['semester'] = $_GET['semester'];
 
