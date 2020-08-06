@@ -25,6 +25,8 @@ class Tutor extends CI_Controller
         $this->db->where('user.id', $data['user']['id']);
         $data['fakultas_user'] = $this->db->get()->row_array();
 
+        if ($data['fakultas_user'] == null)
+            $data['fakultas_user']['fakultas'] = '';
         // $this->db->select("`data_tutor`.*,`user`.`name`,`user`.`jk`, `user_role`.`role`, `user`.`role_id`,  `user`.`id` as `iduser`, `user`.`is_active`, `daftar_kelas`.`prodi`, `daftar_kelas`.`fakultas`");
 
         // $this->db->from('user');
