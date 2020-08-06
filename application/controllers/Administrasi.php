@@ -236,7 +236,8 @@ class Administrasi extends CI_Controller
             'tingkat'   => 3,
             'fakultas'  => urldecode($fakultas),
             'jurusan'   => urldecode($jurusan),
-            'prodi'     => $this->input->post('prodi')
+            'prodi'     => $this->input->post('prodi'),
+            'semester'  => 'Ganjil'
         ];
 
         $is_same = $this->db->get_where('daftar_kelas', $data)->row_array()['prodi'];
@@ -403,7 +404,8 @@ class Administrasi extends CI_Controller
             'fakultas'  => $this->input->post('fakultas'),
             'jurusan'   => $this->input->post('jurusan'),
             'prodi'     => $this->input->post('prodi'),
-            'kelas'     => $this->input->post('kelas')
+            'semester'  => $this->input->post('semester'),
+            'kelas'     => htmlspecialchars($this->input->post('kelas'))
         ];
         $this->db->insert('daftar_kelas', $data);
 

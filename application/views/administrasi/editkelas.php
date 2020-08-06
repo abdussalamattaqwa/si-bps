@@ -87,6 +87,9 @@
                         <input type="hidden" class="formInput form-control form-control-user" name="prodi" value="<?= $prodi['prodi']; ?>">
                     </div>
                     <div class="form-group">
+                        <input type="hidden" class="formInput form-control form-control-user" name="semester" value="<?= $prodi['semester']; ?>">
+                    </div>
+                    <div class="form-group">
                         <input type="text" class="formInput form-control form-control-user" name="kelas">
                     </div>
                 </div>
