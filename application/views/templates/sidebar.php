@@ -3,10 +3,12 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-        <!-- <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-code"></i> </div> -->
+        <div class="sidebar-brand-icon ">
+            <!-- rotate-n-15 -->
+            <i class="fas fa-layer-group"></i>
+        </div>
 
-        <div class="sidebar-brand-text mx-3"> BPS Admin</div>
+        <div class="sidebar-brand-text mx-3">BPS Admin</div>
     </a>
 
     <!-- Divider -->

@@ -7,8 +7,18 @@ class Halaqah_model extends CI_Model
 
         $data['kelas'] = $this->db->get_where('daftar_kelas', ['id' => $idkelas])->row_array();
 
-        $jk = $_GET['jk'];
-        $data['jk'] = $jk;
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['jk'] = $data['user']['jk'];
+
+        $status = search_user_role($data['user']['role_id']);
+        if ($status == 'dosen') {
+            if (isset($_GET['jk'])) {
+                $data['jk'] = $_GET['jk'];
+            }
+        }
+        $jk = $data['jk'];
+
         $query = "SELECT `mahasiswa`.*, `daftar_kelas`.`kelas`, `nilai_sains`.`pre_test`, `nilai_sains`.`final_test` FROM mahasiswa 
         JOIN `daftar_kelas` ON `mahasiswa`.`id_kelas` = `daftar_kelas`.`id` 
         LEFT JOIN `nilai_sains` ON `mahasiswa`.`id` = `nilai_sains`.`id_mahasiswa`  WHERE `mahasiswa`.`id_kelas` = $idkelas AND `mahasiswa`.`angkatan` = $tahun AND `mahasiswa`.`jk` = '$jk' ORDER BY `mahasiswa`.`id`";
