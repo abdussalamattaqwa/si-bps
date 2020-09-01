@@ -62,6 +62,7 @@ class Nilai extends CI_Controller
         $this->db->order_by('jurusan');
         $data['jurusan'] = $this->db->get()->result_array();
 
+        $data['tblKembali'] = base_url('nilai');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -137,6 +138,8 @@ class Nilai extends CI_Controller
         endforeach;
 
         $data['angkatan'] = $pilih_angkatan;
+        $data['tblKembali'] = base_url('nilai/fakultas/' . $data['prodi']['fakultas']);
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -185,6 +188,12 @@ class Nilai extends CI_Controller
         $data['title'] = 'Daftar Nilai';
 
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $idprodi = $this->db->get_where('daftar_kelas', [
+            'prodi' => $data['kelas']['prodi'],
+            'tingkat' => 3
+        ])->row_array()['id'];
+        $data['tblKembali'] = base_url('nilai/prodi/' . $idprodi);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

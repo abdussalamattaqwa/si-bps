@@ -74,6 +74,7 @@ class Administrasi extends CI_Controller
         }
 
         $data['fakultas'] = $fakultas;
+        $data['tblKembali'] = base_url('administrasi');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -382,6 +383,7 @@ class Administrasi extends CI_Controller
             $data['daftar_kelas'][$i]['anggota'] = $jumlah_mahasiswa;
             $i++;
         endforeach;
+        $data['tblKembali'] = base_url('administrasi/fakultas/' . $data['prodi']['fakultas']);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

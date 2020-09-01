@@ -123,6 +123,9 @@ class Halaqah extends CI_Controller
         }
 
         $data['pilihan_angkatan'] = $pilih_angkatan;
+
+        $data['tblKembali'] = base_url('halaqah');
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -201,6 +204,7 @@ class Halaqah extends CI_Controller
         $this->db->order_by('jurusan');
         $data['jurusan'] = $this->db->get('daftar_kelas')->result_array();
 
+        $data['tblKembali'] = base_url('halaqah/fakultas/' . urldecode($f));
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -226,6 +230,7 @@ class Halaqah extends CI_Controller
 
         $data['daftar_kelas'] = $this->db->get()->result_array();
 
+        $data['tblKembali'] = base_url('halaqah/daftarjurusan/' . $data['prodi']['fakultas']);
 
         $this->db->select('angkatan');
         $this->db->from('mahasiswa');
@@ -361,6 +366,14 @@ class Halaqah extends CI_Controller
 
         $data['tahun'] = $tahun;
         $data['jk'] = $jk;
+        $data['status'] = $status;
+        $idprodi = $this->db->get_where('daftar_kelas', [
+            'prodi' => $data['kelas']['prodi'],
+            'tingkat' => 3
+        ])->row_array()['id'];
+
+        $data['tblKembali'] = base_url('halaqah/daftarkelas/' . $idprodi);
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -401,6 +414,8 @@ class Halaqah extends CI_Controller
         $data['tahun'] = $tahun;
         $data['jk'] = $jk;
         $data['idkelas'] = $idkelas;
+
+        $data['tblKembali'] = base_url('halaqah/daftarmahasiswa/' . $tahun . '/' . $idkelas . '?jk=' . $data['jk']);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -495,6 +510,18 @@ class Halaqah extends CI_Controller
 
         $data['proses'] = $proses;
 
+
+        $this->db->select('fakultas');
+        $this->db->from('daftar_kelas');
+        $this->db->join('data_tutor', 'data_tutor.id_prodi = daftar_kelas.id', 'left');
+        $this->db->join('user', 'user.id = data_tutor.id_user', 'left');
+        $this->db->where('user.id', $data['user']['id']);
+        $data['fakultas_user'] = $this->db->get()->row_array();
+
+        if ($data['fakultas_user'] == null)
+            $data['fakultas_user']['fakultas'] = '';
+
+
         $this->db->select('data_tutor.*, fakultas, user.name');
         $this->db->from('user');
         $this->db->join('data_tutor', 'data_tutor.id_user = user.id', 'left');
@@ -502,12 +529,19 @@ class Halaqah extends CI_Controller
         $this->db->join('user_role', 'user_role.id = user.role_id');
         $this->db->where_in('role_id', [3, 5, 7, 8]);
         $this->db->where('user.jk', $data['jk']);
-        $this->db->order_by('fakultas');
+        $this->db->order_by('
+        FIELD(
+            fakultas, "' . $data['fakultas_user']['fakultas'] . '"
+        ) DESC');
+        $this->db->order_by('fakultas', 'desc');
+        $this->db->order_by('date_created', 'desc');
         $this->db->order_by('role_id');
         $data['tutor'] = $this->db->get()->result_array();
 
         $data['tahun'] = $tahun;
 
+
+        $data['tblKembali'] = base_url('halaqah/daftarmahasiswa/' . $tahun . '/' . $idkelas . '?jk=' . $data['jk']);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

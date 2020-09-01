@@ -4,21 +4,30 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Daftar Halaqah <?= ($jk == 'L') ? 'Ikhwah' : 'Akhwat'; ?></h1>
     <div class="form-group row">
-        <label for="semester" class="col-sm-2 col-form-label">Semester</label>
+        <label for="semester" class="col-sm-2 col-form-label text-gray-900">Semester</label>
         <div class="col-sm-6">
             <input type="text" name="semester" id="semester" class="form-control" value="<?= $kelas['semester']; ?>" readonly>
         </div>
     </div>
     <div class="form-group row">
-        <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
+        <label for="kelas" class="col-sm-2 col-form-label text-gray-900">Kelas</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" value="<?= $kelas['kelas']; ?>" readonly>
         </div>
     </div>
+    <?php if ($status == 'dosen') : ?>
+        <div class="row">
+
+            <label for="kelas" class="col-sm-2 col-form-label text-gray-900">Select Gender</label>
+            <div class="btn-group col-sm-3" role="group">
+                <a class="btn btn-secondary text-gray-100" href="?jk=L">Ikhwah</a> &nbsp;
+                <a class="btn btn-secondary text-gray-100" href="?jk=P">Akhwat</a>
+            </div>
+        </div>
+    <?php endif; ?>
 
 
     <br>
-
 
     <a href class="btn btn-primary mb-3 text-gray-100" data-toggle="modal" data-target="#ModalTambah">Tambah Halaqah</a>
 

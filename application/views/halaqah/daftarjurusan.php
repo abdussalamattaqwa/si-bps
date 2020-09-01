@@ -5,25 +5,41 @@
     <h1 class="h3 mb-4 text-gray-800">Pilih Jurusan</h1>
 
 
-    <?php foreach ($jurusan as $j) : ?>
-        <?php if ($j['tingkat'] == 2) : ?>
-            <div class="ml-3 border-left-info" style="padding-left: 12px;">
-                <h4><?= $j['jurusan']; ?></h4>
+    <?php foreach ($jurusan as $dj) : ?>
+        <?php if ($dj['tingkat'] == 2) : ?>
+            <!-- <div class="ml-3 border-left-info" style="padding-left: 12px;">
+                <h4><?= $dj['jurusan']; ?></h4>
+            </div> -->
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#jurusan<?= $dj['id']; ?>" aria-expanded="false" aria-controls="jurusan<?= $dj['id']; ?>">
+                        <?= $dj['jurusan']; ?>
+                    </button>
+                </div>
             </div>
-            <?php foreach ($jurusan as $dp) : ?>
-                <?php if ($dp['tingkat'] == 3 && $dp['jurusan'] == $j['jurusan']) : ?>
-                    <ul>
-                        <li>
-                            <a href="<?= base_url('halaqah/daftarkelas/' . $dp['id']); ?>">
-                                <h5 class="text-gray-800"><?= $dp['prodi']; ?> - Semester <b class="text-<?= ($dp['semester'] == 'Ganjil') ?                                                          'primary' : 'warning' ?>">
-                                        <?= $dp['semester'] ?>
-                                    </b></h5>
-                            </a>
-                        </li>
-                    </ul>
-                <?php endif; ?>
-            <?php endforeach; ?>
-            <br>
+            <div class="collapse" id="jurusan<?= $dj['id']; ?>">
+                <div class="card" style="padding: 10px;">
+                    <div class="form-group">
+                        <?php foreach ($jurusan as $dp) : ?>
+                            <?php if ($dp['tingkat'] == 3 && $dp['jurusan'] == $dj['jurusan']) : ?>
+
+
+
+                                <li class="mb-2">
+                                    <a href="<?= base_url('halaqah/daftarkelas/' . $dp['id']); ?>">
+                                        <p class="text-gray-800 " style="display: inline;"><?= $dp['prodi']; ?> - Semester <b class="text-<?= ($dp['semester'] == 'Ganjil') ? 'primary' : 'warning' ?>">
+                                                <?= $dp['semester'] ?>
+                                            </b></p>
+                                    </a>
+                                </li>
+
+
+
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
 
         <?php endif; ?>
 

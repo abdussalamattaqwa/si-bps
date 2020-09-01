@@ -47,6 +47,7 @@
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="image" name="image" onchange="tampilGambar()">
                                 <label class="custom-file-label" for="image">Choose file</label>
+                                <small class="text-muted ">Maximum file size 1mb</small>
                             </div>
                         </div>
                     </div>

@@ -67,6 +67,9 @@ class Dosen extends CI_Controller
 
             $this->db->where('id = 2 OR id = 4 OR id = 6');
             $data['role'] = $this->db->get('user_role')->result_array();
+
+            $data['tblKembali'] = base_url('dosen');
+
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
@@ -148,6 +151,7 @@ class Dosen extends CI_Controller
 
             $this->db->where('id = 2 OR id = 4 OR id = 6');
             $data['role'] = $this->db->get('user_role')->result_array();
+            $data['tblKembali'] = base_url('dosen');
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);

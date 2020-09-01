@@ -12,9 +12,24 @@
                 <i class="fa fa-bars"></i>
             </button>
 
+            <a href="
+            <?php
+            if (isset($tblKembali)) {
+                echo $tblKembali;
+            } else {
+                echo "";
+            }
+            ?>" class="btn btn-light btn-icon-split">
+                <span class="icon text-gray-600">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Kembali</span>
+            </a>
+
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
                 <div class="topbar-divider d-none d-sm-block"></div>
+
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">

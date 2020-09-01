@@ -41,7 +41,7 @@ class Tutor extends CI_Controller
         if (isset($_GET['jk'])) {
             if ($data['status'] == 'dosen') {
                 $data['jk'] = $_GET['jk'];
-                $this->db->where('user.jk', $data['jk']);
+                // $this->db->where('user.jk', $data['jk']);
             }
         } else {
             // $this->db->where('user.jk', $data['user']['jk']);
@@ -50,7 +50,7 @@ class Tutor extends CI_Controller
         // $this->db->order_by('role_id');
         // $data['tutor'] = $this->db->get()->result_array();
 
-        $query = "SELECT `data_tutor`.*,`user`.`name`,`user`.`jk`, `user_role`.`role`, `user`.`role_id`,  `user`.`id` as `iduser`, `user`.`is_active`, `daftar_kelas`.`prodi`, `daftar_kelas`.`fakultas` FROM `user` LEFT JOIN `data_tutor` ON `data_tutor`.`id_user` = `user`.`id` LEFT JOIN `daftar_kelas` ON `daftar_kelas`.`id` = `data_tutor`.`id_prodi` JOIN `user_role` ON `user_role`.`id` = `user`.`role_id` WHERE `role_id` IN (3,5,7,8) AND `user`.`jk` = '" . $data['jk'] . "' ORDER BY FIELD(`fakultas`, '" . $data['fakultas_user']['fakultas'] . "') desc, `role_id`, `date_created` desc, `fakultas`";
+        $query = "SELECT `data_tutor`.*,`user`.`name`,`user`.`jk`, `user_role`.`role`, `user`.`role_id`,  `user`.`id` as `iduser`, `user`.`is_active`, `daftar_kelas`.`prodi`, `daftar_kelas`.`fakultas` FROM `user` LEFT JOIN `data_tutor` ON `data_tutor`.`id_user` = `user`.`id` LEFT JOIN `daftar_kelas` ON `daftar_kelas`.`id` = `data_tutor`.`id_prodi` JOIN `user_role` ON `user_role`.`id` = `user`.`role_id` WHERE `role_id` IN (3,5,7,8) AND `user`.`jk` = '" . $data['jk'] . "' ORDER BY FIELD(`fakultas`, '" . $data['fakultas_user']['fakultas'] . "') desc,`role_id`,`fakultas`, `date_created` desc ";
 
         $data['tutor'] = $this->db->query($query)->result_array();
 
@@ -131,7 +131,8 @@ class Tutor extends CI_Controller
             $this->db->order_by('jurusan');
             $data['prodi'] = $this->db->get()->result_array();
 
-            // rsort($data['role_id']);
+            $data['tblKembali'] = base_url('tutor');
+
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
@@ -266,6 +267,8 @@ class Tutor extends CI_Controller
             $this->db->where('tingkat', 3);
             $this->db->order_by('fakultas');
             $data['prodi'] = $this->db->get()->result_array();
+
+            $data['tblKembali'] = base_url('tutor');
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);

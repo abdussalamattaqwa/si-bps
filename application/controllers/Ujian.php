@@ -33,10 +33,12 @@ class Ujian extends CI_Controller
     public function fakultas($f)
     {
 
-        $data['title'] = 'Ujian SAINS';
+        $data['title'] = 'Pilih Jurusan';
 
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
+
+        $data['tblKembali'] = base_url('ujian');
 
         $fakultas = urldecode($f);
 
@@ -65,6 +67,7 @@ class Ujian extends CI_Controller
 
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
+
 
         $data['prodi'] = $this->db->get_where('daftar_kelas', ['id' => $id])->row_array();
 
@@ -132,6 +135,7 @@ class Ujian extends CI_Controller
         endforeach;
 
         $data['angkatan'] = $pilih_angkatan;
+        $data['tblKembali'] = base_url('ujian/fakultas/' . $data['prodi']['fakultas']);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -204,12 +208,19 @@ class Ujian extends CI_Controller
             $this->session->userdata('email')])->row_array();
             $data['kelas'] = $this->db->get_where('daftar_kelas', ['id' => $idkelas])->row_array();
 
+            $data['prodi'] = $this->db->get_where('daftar_kelas', [
+                'prodi' => $data['kelas']['prodi'],
+                'tingkat' => 3
+            ])->row_array();
 
             $query = "SELECT `mahasiswa`.*, `daftar_kelas`.`kelas`, `nilai_sains`.`pre_test`, `nilai_sains`.`final_test` FROM mahasiswa JOIN `daftar_kelas` ON `mahasiswa`.`id_kelas` = `daftar_kelas`.`id` LEFT JOIN `nilai_sains` ON `mahasiswa`.`id` = `nilai_sains`.`id_mahasiswa`  WHERE `mahasiswa`.`id_kelas` = $idkelas AND  `mahasiswa`.`angkatan` = $pilih_angkatan AND `mahasiswa`.`jk` = '" . $data['user']['jk'] . "' ORDER BY `mahasiswa`.`id`";
 
             $data['pilihan_angkatan'] = $pilih_angkatan;
 
             $data['mahasiswa'] = $this->db->query($query)->result_array();
+
+            $data['tblKembali'] = base_url('ujian/kelas/' . $data['prodi']['id']);
+
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
@@ -245,6 +256,8 @@ class Ujian extends CI_Controller
         $data['mahasiswa'] = $this->db->get_where('mahasiswa', ['id' => $id_mahasiswa])->row_array();
         $data['test'] = $test;
         $data['proses'] = $proses;
+
+        $data['tblKembali'] = base_url('ujian/mahasiswa/' . $data['kelas']['id'] . '?tahun=' . $data['mahasiswa']['angkatan']);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

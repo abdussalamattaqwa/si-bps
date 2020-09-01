@@ -83,7 +83,6 @@
                                         <?= $h['jumlah_anggota']; ?>
                                     </td>
                                     <td>
-                                        <?= $pilihan_angkatan; ?>
                                         <a href="<?= base_url('halaqah/daftarmahasiswa/' . $pilihan_angkatan . '/' . $h['id_kelas']); ?>?jk=<?= $h['jk']; ?>" class="btn btn-success btn-sm"><i class="fas fa-fw fa-edit"></i> Edit</a>
                                     </td>
                                 </tr>

@@ -209,6 +209,8 @@ class Binaan extends CI_Controller
 
             endforeach;
 
+            $data['tblKembali'] = base_url('binaan');
+
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
@@ -278,6 +280,9 @@ class Binaan extends CI_Controller
         endforeach;
 
         $data['jenis_nilai'] = urldecode($jenis_nilai);
+
+        $data['tblKembali'] = base_url('binaan/nilai/' . $idhalaqah);
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

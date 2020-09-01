@@ -49,7 +49,9 @@
 
 
                                 <tr>
-                                    <td rowspan="2" scope="row"><img src="<?= base_url('assets/'); ?>img/logo-unm.png" width="85" height="85"></td>
+                                    <td rowspan="2" scope="row" style="padding: 0;" width="76">
+                                        <img src="<?= base_url('assets/'); ?>img/logo-unm.png" width="75" height="75" align="center">
+                                    </td>
                                     <td colspan="4" style=" font-family:Times New Roman; font-size:12pt; color:#000000;">
                                         <div align="center" class="style7">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN <br />
                                             UNIVERSITAS NEGERI MAKASSAR<br />
@@ -57,7 +59,9 @@
                                             BADAN PELAKSANA SAINS
                                         </div>
                                     </td>
-                                    <td rowspan="2" scope="row"><img src="<?= base_url('assets/'); ?>img/logo-bps.png" width="85" height="85"></td>
+                                    <td rowspan="2" scope="row" width="76" style="padding: 0;">
+                                        <img src="<?= base_url('assets/'); ?>img/logo-bps.png" width="75" height="75">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" style=" font-family:Times New Roman; font-size:11pt; color:#000000;" align="center">
@@ -82,35 +86,28 @@
                         <table width="580" border="0" align="center">
                             <tbody>
                                 <tr>
-                                    <td colspan="6" scope="row" align="center" style=" font-family:Times New Roman; font-size:14pt; color:#000000;" width="580">
+                                    <td colspan="2" scope="row" align="center" style=" font-family:Times New Roman; font-size:14pt; color:#000000;" width="580">
                                         Daftar Halaqah <?= ($jk == 'L') ? 'Ikhwah' : 'Akhwat'; ?>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td height="10"></td>
                                 </tr>
                                 <tr>
-                                    <td width="100">Semester/Tahun</td>
-                                    <td width="400">: <?= $kelas['semester'] . '/' . $tahun; ?></td>
-                                    <td width="30">&nbsp;</td>
-                                    <td width="30">&nbsp;</td>
+                                    <td width="120">Semester/Tahun</td>
+                                    <td>: <?= $kelas['semester'] . '/' . $tahun; ?></td>
                                 </tr>
                                 <tr>
-                                    <td width="100">Fakultas</td>
-                                    <td width="400">: <?= $kelas['fakultas']; ?></td>
-                                    <td width="20">&nbsp;</td>
-                                    <td width="20">&nbsp;</td>
+                                    <td width="120">Fakultas</td>
+                                    <td>: <?= $kelas['fakultas']; ?></td>
                                 </tr>
                                 <tr>
-                                    <td width="100">Prodi</td>
-                                    <td width="400">: <?= $kelas['prodi']; ?></td>
-                                    <td width="20">&nbsp;</td>
-                                    <td width="20">&nbsp;</td>
+                                    <td width="120">Prodi</td>
+                                    <td>: <?= $kelas['prodi']; ?></td>
                                 </tr>
                                 <tr>
-                                    <td width="100">Kelas</td>
-                                    <td width="400">: <?= $kelas['kelas']; ?></td>
-                                    <td width="20">&nbsp;</td>
-                                    <td width="20">&nbsp;</td>
+                                    <td width="120">Kelas</td>
+                                    <td>: <?= $kelas['kelas']; ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -126,22 +123,16 @@
                             <table width="580" border="0" align="center">
                                 <tbody>
                                     <tr>
-                                        <td width="100">Tutor</td>
-                                        <td width="400">: <?= $h['nama']; ?></td>
-                                        <td width="30">&nbsp;</td>
-                                        <td width="30">&nbsp;</td>
+                                        <td width="120">Tutor</td>
+                                        <td>: <?= $h['nama']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td width="100">No. Telp</td>
-                                        <td width="400">: <?= $h['telp']; ?></td>
-                                        <td width="20">&nbsp;</td>
-                                        <td width="20">&nbsp;</td>
+                                        <td width="120">No. Telp</td>
+                                        <td>: <?= $h['telp']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td width="100">Halaqah</td>
-                                        <td width="400">: <?= $h['level']; ?></td>
-                                        <td width="20">&nbsp;</td>
-                                        <td width="20">&nbsp;</td>
+                                        <td width="120">Halaqah</td>
+                                        <td>: <?= $h['level']; ?></td>
                                     </tr>
 
                                 </tbody>
@@ -212,7 +203,7 @@
     </div>
 
     <script>
-        // window.print();
+        window.print();
     </script>
 </body>
 
